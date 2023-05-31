@@ -1,0 +1,39 @@
+name: Auto Move Issue to "In Progress" Column
+
+on:
+  issues:
+    types:
+      - labeled
+
+jobs:
+  auto-move:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if issue label is "In Progress"
+        id: check_label
+        run: |
+          echo "::set-output name=is_in_progress::${{ contains(github.event.issue.labels.*.name, 'In Progress') }}"
+
+      - name: Move issue to "In Progress" column and remove "Done" label
+        if: steps.check_label.outputs.is_in_progress == 'true'
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.REPO_WORKFLOW_TOKEN }}
+          script: |
+            const issueNumber = context.issue.number;
+
+            // Move issue to "In Progress" column
+            await github.projects.createCard({
+              column_id: '47fc9ee4',
+              content_type: 'Issue',
+              content_id: issueNumber
+            });
+
+            // Remove "Done" label if it exists
+            await github.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              name: 'Done'
+            });

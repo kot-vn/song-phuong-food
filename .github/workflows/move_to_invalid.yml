@@ -1,0 +1,47 @@
+name: Auto Move Issue to "Invalid" Column
+
+on:
+  issues:
+    types:
+      - labeled
+
+jobs:
+  auto-move:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if issue label is "Invalid"
+        id: check_label
+        run: |
+          echo "::set-output name=is_in_progress::${{ contains(github.event.issue.labels.*.name, 'Invalid') }}"
+
+      - name: Move issue to "Invalid" column and remove "Done" and "In Progress" label
+        if: steps.check_label.outputs.is_invalid == 'true'
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.REPO_WORKFLOW_TOKEN }}
+          script: |
+            const issueNumber = context.issue.number;
+
+            // Move issue to "Invalid" column
+            await github.projects.createCard({
+              column_id: '2fba6327',
+              content_type: 'Issue',
+              content_id: issueNumber
+            });
+
+            // Remove "Done" label if it exists
+            await github.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              name: 'Done'
+            });
+
+            // Remove "In Progress" label if it exists
+            await github.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              name: 'In Progress'
+            });
