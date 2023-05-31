@@ -19,7 +19,7 @@ jobs:
         if: steps.check_label.outputs.is_in_progress == 'true'
         uses: actions/github-script@v4
         with:
-          github-token: ${{ secrets.REPO_WORKFLOW_TOKEN }}
+          github-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
           script: |
             const issueNumber = context.issue.number;
 
