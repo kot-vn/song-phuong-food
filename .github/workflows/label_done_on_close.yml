@@ -13,7 +13,7 @@ jobs:
       - name: Change issue label to "done"
         uses: actions/github-script@v4
         with:
-          github-token: ${{ secrets.REPO_WORKFLOW_TOKEN }}
+          github-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
           script: |
             const issueNumber = context.payload.issue.number;
 

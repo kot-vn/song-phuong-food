@@ -13,13 +13,13 @@ jobs:
       - name: Check if issue label is "Invalid"
         id: check_label
         run: |
-          echo "::set-output name=is_in_progress::${{ contains(github.event.issue.labels.*.name, 'Invalid') }}"
+          echo "::set-output name=is_invalid::${{ contains(github.event.issue.labels.*.name, 'Invalid') }}"
 
       - name: Move issue to "Invalid" column and remove "Done" and "In Progress" label
         if: steps.check_label.outputs.is_invalid == 'true'
         uses: actions/github-script@v4
         with:
-          github-token: ${{ secrets.REPO_WORKFLOW_TOKEN }}
+          github-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
           script: |
             const issueNumber = context.issue.number;
 
