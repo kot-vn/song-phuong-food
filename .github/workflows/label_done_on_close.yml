@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Change issue label to "done"
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
           script: |
