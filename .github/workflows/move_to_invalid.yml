@@ -17,7 +17,7 @@ jobs:
 
       - name: Move issue to "Invalid" column and remove "Done" and "In Progress" label
         if: steps.check_label.outputs.is_invalid == 'true'
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
           script: |

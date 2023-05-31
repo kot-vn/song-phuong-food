@@ -17,7 +17,7 @@ jobs:
 
       - name: Move issue to "In Progress" column and remove "Done" label
         if: steps.check_label.outputs.is_in_progress == 'true'
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
           script: |
