@@ -15,7 +15,7 @@ jobs:
         run: |
           echo "::set-output name=is_in_progress::${{ contains(github.event.issue.labels.*.name, 'Invalid') }}"
 
-      - name: Move issue to "Invalid" column and remove "Done" label
+      - name: Move issue to "Invalid" column and remove "Done" and "In Progress" label
         if: steps.check_label.outputs.is_invalid == 'true'
         uses: actions/github-script@v4
         with:
