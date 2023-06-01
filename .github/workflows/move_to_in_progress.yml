@@ -21,13 +21,15 @@ jobs:
         with:
           github-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
           script: |
-            const issueNumber = context.issue.number;
+            const { context, github } = require('@actions/github');
+
+            const issueNumber = context.payload.issue.number;
 
             // Move issue to "In Progress" column
-            await github.projects.createCard({
-              column_id: '47fc9ee4',
-              content_type: 'Issue',
-              content_id: issueNumber
+            await github.projects.moveCard({
+              card_id: context.payload.issue.project_card.id,
+              position: 'top',
+              column_id: '47fc9ee4' // Replace with the actual column ID of the "In Progress" column
             });
 
             // Remove "Done" label if it exists
