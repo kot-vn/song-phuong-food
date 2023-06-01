@@ -21,13 +21,15 @@ jobs:
         with:
           github-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
           script: |
+            const { context, github } = require('@actions/github');
+
             const issueNumber = context.issue.number;
 
             // Move issue to "Invalid" column
-            await github.projects.createCard({
-              column_id: '2fba6327',
-              content_type: 'Issue',
-              content_id: issueNumber
+            await github.projects.moveCard({
+              card_id: context.payload.issue.project_card.id,
+              position: 'top',
+              column_id: '2fba6327' // Replace with the actual column ID of the "Invalid" column
             });
 
             // Remove "Done" label if it exists
