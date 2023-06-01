@@ -15,7 +15,7 @@ jobs:
         with:
           repo-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
           label: "In Progress"
-          column: "In Progress"
+          column: "47fc9ee4"
           remove-label: "Done, Invalid"
 
       - name: Move issue to "Invalid" column and remove "Done", "In Progress" label
@@ -23,7 +23,7 @@ jobs:
         with:
           repo-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
           label: "Invalid"
-          column: "Invalid"
+          column: "2fba6327"
           remove-label: "Done, In Progress"
 
       - name: Move issue to "Done" column and remove "Invalid", "In Progress" label
@@ -31,5 +31,5 @@ jobs:
         with:
           repo-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
           label: "Done"
-          column: "Done"
+          column: "98236657"
           remove-label: "Invalid, In Progress"

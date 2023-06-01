@@ -16,4 +16,4 @@ jobs:
         with:
           repo-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
           autolabel-config: '[{"column":"In progress", "add_labels":["In progress"], "remove_labels":["Done", "Invalid"]}, {"column":"Done", "add_labels":["Done"], "remove_labels":["In progress", "Invalid"]}, {"column":"Invalid", "add_labels":["Invalid"], "remove_labels":["In progress", "Done"]}]'
-          projectfilter-config: '{"include":["3"], "exclude":[]}'
+          projectfilter-config: '{"include":["*"], "exclude":[]}'
