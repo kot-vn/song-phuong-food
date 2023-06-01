@@ -22,6 +22,14 @@ jobs:
         uses: bishalrai96/Project_Card_Automation@master
         with:
           repo-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
-          label: "In Progress"
-          column: "In Progress"
+          label: "Invalid"
+          column: "Invalid"
           remove-label: "Done, In Progress"
+
+      - name: Move issue to "Done" column and remove "Invalid", "In Progress" label
+        uses: bishalrai96/Project_Card_Automation@master
+        with:
+          repo-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
+          label: "Done"
+          column: "Done"
+          remove-label: "Invalid, In Progress"
