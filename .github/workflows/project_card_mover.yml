@@ -1,0 +1,35 @@
+name: Auto Move Issue to destination Column
+
+on:
+  issues:
+    types:
+      - labeled
+
+jobs:
+  auto-move:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Move issue to "In Progress" column and remove "Done", "Invalid" label
+        uses: bishalrai96/Project_Card_Automation@master
+        with:
+          repo-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
+          label: "In Progress"
+          column: "In Progress"
+          remove-label: "Done, Invalid"
+
+      - name: Move issue to "Invalid" column and remove "Done", "In Progress" label
+        uses: bishalrai96/Project_Card_Automation@master
+        with:
+          repo-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
+          label: "Invalid"
+          column: "Invalid"
+          remove-label: "Done, In Progress"
+
+      - name: Move issue to "Done" column and remove "Invalid", "In Progress" label
+        uses: bishalrai96/Project_Card_Automation@master
+        with:
+          repo-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
+          label: "Done"
+          column: "Done"
+          remove-label: "Invalid, In Progress"

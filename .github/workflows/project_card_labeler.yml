@@ -1,0 +1,19 @@
+name: Auto Labels Issue by destination Column
+
+on:
+  project_card:
+    types:
+      - moved
+
+jobs:
+  auto-label:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Labels issue by destination Column
+        id: runprojectcardautolabel
+        uses: Matticusau/projectcard-autolabel@v1.0.0
+        with:
+          repo-token: ${{ secrets.SUPER_ADMIN_TOKEN  }}
+          autolabel-config: '[{"column":"In progress", "add_labels":["In progress"], "remove_labels":["Done", "Invalid"]}, {"column":"Done", "add_labels":["Done"], "remove_labels":["In progress", "Invalid"]}, {"column":"Invalid", "add_labels":["Invalid"], "remove_labels":["In progress", "Done"]}]'
+          projectfilter-config: '{"include":["3"], "exclude":[]}'
