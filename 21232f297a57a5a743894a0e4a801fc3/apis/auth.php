@@ -1,7 +1,6 @@
 <?php
-function authRedirect($path)
+function authRedirect($path, $currentUrl)
 {
-  session_start();
   $cpanelLocation = "21232f297a57a5a743894a0e4a801fc3";
 
   if (empty($_SESSION['admin']) && empty($_SESSION['employee'])) {
@@ -10,6 +9,8 @@ function authRedirect($path)
     $location = $path . $cpanelLocation . "/cpanel/";
   }
 
-  header("Location: $location", true, 301);
-  exit;
+  if ($currentUrl != $location) {
+    header("Location: $location", true, 301);
+    exit;
+  }
 }
