@@ -1,4 +1,4 @@
-# Details
+# Pull Details
 
 **Issues:**
 
