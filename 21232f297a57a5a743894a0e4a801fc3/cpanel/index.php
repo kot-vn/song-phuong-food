@@ -1,3 +1,11 @@
+<?php
+include "../apis/env.php";
+include "../apis/auth.php";
+
+session_start();
+authRedirect(getHost(), getFullPath());
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

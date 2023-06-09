@@ -1,8 +1,11 @@
 <?php
 include "../apis/databaseConnector.php";
+include "../apis/env.php";
 include "../apis/auth.php";
 
-authRedirect(getHost());
+session_start();
+$connect = connectDatabase(getEnvironment());
+authRedirect(getHost(), getFullPath());
 ?>
 
 <!DOCTYPE html>
@@ -61,23 +64,28 @@ authRedirect(getHost());
               if (isset($_POST['email']) && isset($_POST['password'])) {
                 $email = $_POST['email'];
                 $password = md5($_POST['password']);
-                $query = "SELECT * FROM accounts WHERE  deleted_at IS NULL";
+                $query = "SELECT * FROM accounts WHERE email='$email' and password='$password' AND deleted_at IS NULL";
                 $result = $connect->query($query);
+
                 if (mysqli_num_rows($result) == 0) {
-                  $alert = "Tài khoản không tồn tại";
+                  $alert = "Thông tin đăng nhập không chính xác";
                 } else {
                   $result = mysqli_fetch_array($result);
-                  if ($result['role_id'] == 1) {
-                    $_SESSION['admin'] = $result;
-                  } else if ($result['role_id'] == 2) {
-                    $_SESSION['employee'] = $result;
+
+                  if ($result['is_active']) {
+                    if ($result['role_id'] == 1) {
+                      $_SESSION['admin'] = $result;
+                    } else if ($result['role_id'] == 2) {
+                      $_SESSION['employee'] = $result;
+                    }
+                    $_SESSION['start'] = time();
+                    $_SESSION['expire'] = $_SESSION['start'] + (6 * 60 * 60);
+
+                    authRedirect(getHost(), getFullPath());
+                  } else {
+                    $alert = "Tài khoản của bạn đã bị vô hiệu hoá";
                   }
-                  $_SESSION['start'] = time();
-                  $_SESSION['expire'] = $_SESSION['start'] + (6 * 60 * 60);
-                  authRedirect(getHost());
                 }
-              } else {
-                $error = "Email và password không được để trống";
               }
               ?>
               <form role="form" class="text-start" method="post">
@@ -87,6 +95,7 @@ authRedirect(getHost());
                 <div class="mb-3">
                   <input type="password" class="form-control" name="password" placeholder="Mật khẩu" aria-label="Mật khẩu" required>
                 </div>
+                <?= isset($alert) ? "<small class='text-danger'>$alert</small>" : "" ?>
                 <div class="text-center">
                   <button type="submit" class="btn bg-gradient-success w-100 my-4 mb-2">Đăng nhập</button>
                 </div>

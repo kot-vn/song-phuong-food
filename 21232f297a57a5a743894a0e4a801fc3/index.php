@@ -2,7 +2,8 @@
 include "./apis/env.php";
 include "./apis/auth.php";
 
-authRedirect(getHost());
+session_start();
+echo authRedirect(getHost(), getFullPath());
 ?>
 
 <!DOCTYPE html>
