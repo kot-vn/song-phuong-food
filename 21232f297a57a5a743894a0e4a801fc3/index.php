@@ -4,7 +4,7 @@ include "./assets/server/env.php";
 include "./assets/server/url.php";
 
 session_start();
-echo authRedirect(getHost(getEnvironment()), getFullPath());
+authRedirect(getHost(getEnvironment()), getFullPath());
 ?>
 
 <!DOCTYPE html>
