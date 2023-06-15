@@ -1,11 +1,14 @@
 <?php
-include "../apis/databaseConnector.php";
-include "../apis/env.php";
-include "../apis/auth.php";
+include "../assets/server/databaseConnector.php";
+include "../assets/server/env.php";
+include "../assets/server/auth.php";
+include "../assets/server/url.php";
 
 session_start();
 $connect = connectDatabase(getEnvironment());
-authRedirect(getHost(), getFullPath());
+authRedirect(getHost(getEnvironment()), getFullPath());
+
+include "../assets/server/login.php";
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +19,6 @@ authRedirect(getHost(), getFullPath());
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Favicons -->
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32x32.png">
@@ -60,34 +62,6 @@ authRedirect(getHost(), getFullPath());
               <h5>Đăng nhập</h5>
             </div>
             <div class="card-body">
-              <?php
-              if (isset($_POST['email']) && isset($_POST['password'])) {
-                $email = $_POST['email'];
-                $password = md5($_POST['password']);
-                $query = "SELECT * FROM accounts WHERE email='$email' and password='$password' AND deleted_at IS NULL";
-                $result = $connect->query($query);
-
-                if (mysqli_num_rows($result) == 0) {
-                  $alert = "Thông tin đăng nhập không chính xác";
-                } else {
-                  $result = mysqli_fetch_array($result);
-
-                  if ($result['is_active']) {
-                    if ($result['role_id'] == 1) {
-                      $_SESSION['admin'] = $result;
-                    } else if ($result['role_id'] == 2) {
-                      $_SESSION['employee'] = $result;
-                    }
-                    $_SESSION['start'] = time();
-                    $_SESSION['expire'] = $_SESSION['start'] + (6 * 60 * 60);
-
-                    authRedirect(getHost(), getFullPath());
-                  } else {
-                    $alert = "Tài khoản của bạn đã bị vô hiệu hoá";
-                  }
-                }
-              }
-              ?>
               <form role="form" class="text-start" method="post">
                 <div class="mb-3">
                   <input type="email" class="form-control" name="email" placeholder="Email" aria-label="Email" required>
@@ -107,7 +81,7 @@ authRedirect(getHost(), getFullPath());
     </div>
   </main>
   <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-  <?php include "../components/molecules/footer.php" ?>
+  <?php include "../assets/components/molecules/footer.php" ?>
   <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>

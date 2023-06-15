@@ -1,9 +1,10 @@
 <?php
-include "./apis/env.php";
-include "./apis/auth.php";
+include "./assets/server/auth.php";
+include "./assets/server/env.php";
+include "./assets/server/url.php";
 
 session_start();
-echo authRedirect(getHost(), getFullPath());
+authRedirect(getHost(getEnvironment()), getFullPath());
 ?>
 
 <!DOCTYPE html>
