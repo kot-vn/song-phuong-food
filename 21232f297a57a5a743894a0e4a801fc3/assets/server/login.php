@@ -1,27 +1,48 @@
 <?php
-if (isset($_POST['email']) && isset($_POST['password'])) {
-  $email = $_POST['email'];
-  $password = md5($_POST['password']);
-  $query = "SELECT * FROM accounts WHERE email='$email' and password='$password' AND deleted_at IS NULL";
-  $result = $connect->query($query);
+function login($connect)
+{
+  $alert = "";
 
-  if (mysqli_num_rows($result) == 0) {
-    $alert = "Thông tin đăng nhập không chính xác";
-  } else {
-    $result = mysqli_fetch_array($result);
+  if (isset($_POST['email']) && isset($_POST['password'])) {
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
+    $query = "SELECT accounts.id, accounts.display_name, accounts.is_active, roles.name AS role_name FROM `accounts` INNER JOIN roles ON accounts.role_id = roles.id WHERE accounts.email = '$email' AND accounts.password = '$password' AND accounts.deleted_at IS NULL";
+    $result = $connect->query($query);
 
-    if ($result['is_active']) {
-      if ($result['role_id'] == 1) {
-        $_SESSION['admin'] = $result;
-      } else if ($result['role_id'] == 2) {
-        $_SESSION['employee'] = $result;
-      }
-      $_SESSION['start'] = time();
-      $_SESSION['expire'] = $_SESSION['start'] + (6 * 60 * 60);
-
-      authRedirect(getHost(getEnvironment()), getFullPath());
+    if (mysqli_num_rows($result) == 0) {
+      $alert = "Thông tin đăng nhập không chính xác";
     } else {
-      $alert = "Tài khoản của bạn đã bị vô hiệu hoá";
+      $result = mysqli_fetch_array($result);
+
+      if ($result['is_active']) {
+        if ($result['role_name'] == "Admin") {
+          $_SESSION['admin'] = $result;
+        } else if ($result['role_name'] == "Employee") {
+          $_SESSION['employee'] = $result;
+        }
+        $_SESSION['start'] = time();
+        $_SESSION['expire'] = $_SESSION['start'] + (6 * 60 * 60);
+
+        saveLog($connect, $result);
+
+        authRedirect(getHost(getEnvironment()), getFullPath());
+      } else {
+        $alert = "Tài khoản của bạn đã bị vô hiệu hoá";
+      }
     }
   }
+  return $alert;
+}
+
+function saveLog($connect, $result)
+{
+  $account_id = $result['id'];
+  $ip = getIpAddress();
+  $device_name = getDeviceName();
+  $browser_name = getBrowser();
+  date_default_timezone_set("Asia/Ho_Chi_Minh");
+  $login_at = date("Y-m-d H:i:s");
+
+  $query = "INSERT INTO `access_log`(`account_id`, `ip`, `device_name`, `browser_name`, `login_at`) VALUES ('$account_id','$ip','$device_name','$browser_name','$login_at')";
+  $connect->query($query);
 }

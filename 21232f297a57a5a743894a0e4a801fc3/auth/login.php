@@ -3,12 +3,12 @@ include "../assets/server/databaseConnector.php";
 include "../assets/server/env.php";
 include "../assets/server/auth.php";
 include "../assets/server/url.php";
+include "../assets/server/login.php";
 
 session_start();
 $connect = connectDatabase(getEnvironment());
 authRedirect(getHost(getEnvironment()), getFullPath());
-
-include "../assets/server/login.php";
+$alert = login($connect);
 ?>
 
 <!DOCTYPE html>
