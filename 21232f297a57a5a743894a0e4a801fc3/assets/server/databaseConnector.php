@@ -11,7 +11,7 @@ function connectDatabase($environment)
     $username = "id20856483_son56648_spf";
     $password = "Id20856483_son56648_spf";
     $database = "id20856483_son56648_spf";
-  } else if ($environment === "staging") {
+  } else if ($environment === "production") {
     $host = "localhost";
     $username = "son56648_spf";
     $password = "Vu_Khac_Tiep@123";
@@ -21,7 +21,7 @@ function connectDatabase($environment)
   $connect = new MySQLi($host, $username, $password, $database);
   mysqli_set_charset($connect, 'UTF8');
   if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    echo "Mất kết nối tới cơ sở dữ liệu: " . mysqli_connect_error();
   }
 
   return $connect;
