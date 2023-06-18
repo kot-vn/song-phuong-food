@@ -16,6 +16,7 @@
       <div class="ms-md-auto pe-md-3 d-flex align-items-center">
       </div>
       <ul class="navbar-nav  justify-content-end">
+        <?php if (getEnvironment() == "staging") include "../assets/components/atoms/stagingMark.php" ?>
         <li class="nav-item d-flex align-items-center">
           <a href="<?= getPageFloor(1) ?>account" class="nav-link text-body font-weight-bold px-0">
             <i class="fa fa-user me-sm-1"></i>
