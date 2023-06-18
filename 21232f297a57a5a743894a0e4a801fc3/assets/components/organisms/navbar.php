@@ -29,6 +29,11 @@
             include "../atoms/toggleButton.php";
           } ?>
         </li>
+        <li class="nav-item px-3 d-flex align-items-center">
+          <a href="?logout=true" class="nav-link text-body p-0">
+            <i class="fas fa-sign-out-alt"></i>
+          </a>
+        </li>
       </ul>
     </div>
   </div>

@@ -4,7 +4,9 @@ include "../assets/server/url.php";
 include "../assets/server/auth.php";
 
 session_start();
-authRedirect(getHost(getEnvironment()), getFullPath());
+authBlock(getHost(getEnvironment()), getFullPath());
+
+include "../assets/server/logout.php";
 ?>
 
 <!DOCTYPE html>
