@@ -38,6 +38,12 @@ include "../assets/server/logout.php";
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.1.1" rel="stylesheet" />
+
+  <style>
+    .embed-page {
+      height: calc(100vh - 300px);
+    }
+  </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -47,6 +53,9 @@ include "../assets/server/logout.php";
     <?php include "../assets/components/organisms/navbar.php" ?>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
+      <div class="embed-page w-100">
+        <embed type="text/html" src="https://nepcha.com/site/songphuongfood.com" width="100%" height="100%">
+      </div>
       <?php include "../assets/components/molecules/footer.php" ?>
     </div>
   </main>
