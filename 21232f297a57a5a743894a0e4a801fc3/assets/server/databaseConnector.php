@@ -8,9 +8,9 @@ function connectDatabase($environment)
     $database = "songphuongfood";
   } else if ($environment === "staging") {
     $host = "localhost";
-    $username = "id20856483_son56648_spf";
-    $password = "Id20856483_son56648_spf";
-    $database = "id20856483_son56648_spf";
+    $username = "id20950077_root";
+    $password = "STG_songphuongfood_2019";
+    $database = "id20950077_stg_songphuongfood";
   } else if ($environment === "production") {
     $host = "localhost";
     $username = "son56648_spf";
