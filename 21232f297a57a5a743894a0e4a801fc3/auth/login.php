@@ -1,9 +1,10 @@
 <?php
 include "../assets/server/databaseConnector.php";
-include "../assets/server/env.php";
+include "../assets/server/environment.php";
 include "../assets/server/auth.php";
 include "../assets/server/url.php";
 include "../assets/server/login.php";
+include "../../env.php";
 
 session_start();
 $connect = connectDatabase(getEnvironment());
