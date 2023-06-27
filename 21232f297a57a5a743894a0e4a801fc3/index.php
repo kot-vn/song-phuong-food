@@ -2,7 +2,7 @@
 include "./assets/server/auth.php";
 include "./assets/server/environment.php";
 include "./assets/server/url.php";
-include "./env.php";
+include "../env.php";
 
 session_start();
 authRedirect(getHost(getEnvironment()), getFullPath());
