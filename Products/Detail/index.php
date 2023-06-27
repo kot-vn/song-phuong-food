@@ -47,6 +47,7 @@ $result = $connect->query($query);
     <link rel="stylesheet" type="text/css" href="../../assets/styles/style.css" />
     <link rel="stylesheet" href="../../assets/styles/responsive.css">
     <link rel="stylesheet" href="../../assets/styles/custom.css">
+    <script defer data-site="songphuongfood.com" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
   </head>
 
   <body>
