@@ -36,3 +36,7 @@ function getPageFloor($jumpStep)
   $path = getPath();
   return str_repeat('../', count($path) - $jumpStep);
 }
+
+function isUrlActive($navLink){
+  return str_contains(getFullPath(), $navLink);
+}
