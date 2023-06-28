@@ -38,12 +38,11 @@ function saveLog($connect, $result)
 {
   $account_id = $result['id'];
   $ip = getIpAddress();
-  $device_name = getDeviceName();
   $browser_name = getBrowser();
   $os_platform = getPlatform();
   date_default_timezone_set("Asia/Ho_Chi_Minh");
   $login_at = date("Y-m-d H:i:s");
 
-  $query = "INSERT INTO `access_log`(`account_id`, `ip`, `device_name`, `browser_name`, `os_platform`, `login_at`) VALUES ('$account_id','$ip','$device_name','$browser_name','$os_platform','$login_at')";
+  $query = "INSERT INTO `access_log`(`account_id`, `ip`, `browser_name`, `os_platform`, `login_at`) VALUES ('$account_id','$ip','$browser_name','$os_platform','$login_at')";
   $connect->query($query);
 }
