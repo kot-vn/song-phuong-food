@@ -40,6 +40,11 @@ For other systems, see the [installation chapter](https://php.net/install).
 In project root folder, run command
 
 - Windows: `.\21232f297a57a5a743894a0e4a801fc3\assets\bats\windows\makeup_migration`
-- MacOS: `.\21232f297a57a5a743894a0e4a801fc3\assets\bats\macos\makeup_migration`
+- MacOS: `bash ./21232f297a57a5a743894a0e4a801fc3/assets/bats/macos/makeup_migration.sh`
 
 Import that generated file into your local database manager
+
+Generate database migration
+
+- Windows: `.\21232f297a57a5a743894a0e4a801fc3\assets\bats\windows\create_migration`
+- MacOS: `bash ./21232f297a57a5a743894a0e4a801fc3/assets/bats/macos/create_migration.sh`
