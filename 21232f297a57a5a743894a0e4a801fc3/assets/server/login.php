@@ -19,6 +19,8 @@ function login($connect)
           $_SESSION['admin'] = $result;
         } else if ($result['role_name'] == "Employee") {
           $_SESSION['employee'] = $result;
+        } else if ($result['role_name'] == "Super Admin") {
+          $_SESSION['super-admin'] = $result;
         }
         $_SESSION['start'] = time();
         $_SESSION['expire'] = $_SESSION['start'] + (6 * 60 * 60);
