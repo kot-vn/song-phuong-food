@@ -161,8 +161,3 @@ function getPlatform()
 
   return $os_platform;
 }
-
-function getDeviceName()
-{
-  return getenv('COMPUTERNAME') ? getenv('COMPUTERNAME') : 'Unknown';
-}

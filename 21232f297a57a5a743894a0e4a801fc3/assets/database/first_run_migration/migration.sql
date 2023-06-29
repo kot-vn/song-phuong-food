@@ -401,4 +401,6 @@ ALTER TABLE
 
 ALTER TABLE `access_log`
 ADD
-    `os_platform` VARCHAR(255) NULL AFTER `browser_name`;
+    `os_platform` VARCHAR(255) NULL AFTER `browser_name`;SET time_zone = "+00:00";
+
+ALTER TABLE `access_log` DROP COLUMN `device_name`;
