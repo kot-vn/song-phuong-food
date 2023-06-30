@@ -6,7 +6,16 @@ function login($connect)
   if (isset($_POST['email']) && isset($_POST['password'])) {
     $email = $_POST['email'];
     $password = md5($_POST['password']);
-    $query = "SELECT accounts.id, accounts.display_name, accounts.is_active, roles.name AS role_name FROM `accounts` INNER JOIN roles ON accounts.role_id = roles.id WHERE accounts.email = '$email' AND accounts.password = '$password' AND accounts.deleted_at IS NULL";
+    $query = "SELECT
+                  accounts.id,
+                  accounts.display_name,
+                  accounts.is_active,
+                  roles.name AS role_name
+              FROM
+                  `accounts`
+              INNER JOIN roles ON accounts.role_id = roles.id
+              WHERE
+                  accounts.email = '$email' AND accounts.password = '$password' AND accounts.deleted_at IS NULL";
     $result = $connect->query($query);
 
     if (mysqli_num_rows($result) == 0) {

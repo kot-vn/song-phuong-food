@@ -6,7 +6,7 @@ $menuData = '[
       "nav-link": "cpanel/",
       "nav-icon": "fas fa-tachometer-alt",
       "nav-link-text": "Dashboard",
-      "nav-permission": ["Admin","Employee"],
+      "nav-permission": ["Admin","Employee","Super Admin"],
       "has-child": false,
       "nav-child": []
   },
@@ -14,14 +14,14 @@ $menuData = '[
     "nav-link": "accounts/",
     "nav-icon": "fas fa-user",
     "nav-link-text": "Accounts",
-    "nav-permission": ["Admin"],
+    "nav-permission": ["Admin","Super Admin"],
     "has-child": true,
     "nav-child": [
       {
         "nav-link": "accounts/",
         "nav-icon": "fa-tachometer-alt",
         "nav-link-text": "List",
-        "nav-permission": ["Admin"],
+        "nav-permission": ["Admin","Super Admin"],
         "has-child": false,
         "nav-child": []
       }
