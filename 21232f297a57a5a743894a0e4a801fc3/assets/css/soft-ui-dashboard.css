@@ -3870,19 +3870,19 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-primary {
-  --bs-btn-color: #cb0c9f;
-  --bs-btn-border-color: #cb0c9f;
+  --bs-btn-color: #82d616;
+  --bs-btn-border-color: #82d616;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #cb0c9f;
-  --bs-btn-hover-border-color: #cb0c9f;
+  --bs-btn-hover-bg: #82d616;
+  --bs-btn-hover-border-color: #82d616;
   --bs-btn-focus-shadow-rgb: 203, 12, 159;
   --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #cb0c9f;
-  --bs-btn-active-border-color: #cb0c9f;
+  --bs-btn-active-bg: #82d616;
+  --bs-btn-active-border-color: #82d616;
   --bs-btn-active-shadow: none;
-  --bs-btn-disabled-color: #cb0c9f;
+  --bs-btn-disabled-color: #82d616;
   --bs-btn-disabled-bg: transparent;
-  --bs-btn-disabled-border-color: #cb0c9f;
+  --bs-btn-disabled-border-color: #82d616;
   --bs-gradient: none;
 }
 
@@ -5659,7 +5659,6 @@ fieldset:disabled .btn {
   color: var(--bs-pagination-focus-color);
   background-color: var(--bs-pagination-focus-bg);
   outline: 0;
-  box-shadow: var(--bs-pagination-focus-box-shadow);
 }
 
 .page-link.active,
@@ -20606,7 +20605,7 @@ fieldset:disabled .btn {
   background-color: transparent;
   opacity: 0.75;
   box-shadow: none;
-  color: #cb0c9f;
+  color: #82d616;
 }
 
 .btn-secondary:hover,
@@ -21676,8 +21675,8 @@ fieldset:disabled .btn {
 }
 
 .input-group .form-control:focus {
-  border-left: 1px solid #e293d3 !important;
-  border-right: 1px solid #e293d3 !important;
+  border-left: 1px solid #82d616 !important;
+  border-right: 1px solid #82d616 !important;
 }
 
 .input-group .form-control:not(:first-child) {
@@ -21722,7 +21721,7 @@ fieldset:disabled .btn {
 }
 
 .focused {
-  box-shadow: 0 0 0 2px #e9aede;
+  box-shadow: 0 0 0 2px #82d616;
   transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
@@ -21736,7 +21735,7 @@ fieldset:disabled .btn {
 }
 
 .focused .input-group-text {
-  border-color: #e293d3;
+  border-color: #82d616;
 }
 
 .form-check:not(.form-switch) .form-check-input[type="checkbox"],
@@ -24368,7 +24367,7 @@ html {
 .pagination.pagination-success .page-item.active > .page-link:hover {
   background-image: linear-gradient(310deg, #17ad37 0%, #98ec2d 100%);
   border: none;
-  color: #fff;
+  color: #fff !important;
 }
 
 .pagination.pagination-info .page-item.active > .page-link,
@@ -33029,7 +33028,7 @@ Github: https://github.com/fiduswriter/Simple-DataTables
   .active
   a {
   background: transparent;
-  background-image: linear-gradient(310deg, #7928ca 0%, #ff0080 100%);
+  background-image: linear-gradient(310deg, #17ad37 0%, #98ec2d 100%);
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.09),
     0 2px 3px -1px rgba(0, 0, 0, 0.07);
   color: #fff;
@@ -33043,7 +33042,8 @@ Github: https://github.com/fiduswriter/Simple-DataTables
   .dataTable-pagination-list
   .active
   a:hover {
-  background-image: linear-gradient(310deg, #7928ca 0%, #ff0080 100%);
+  background-image: linear-gradient(310deg, #17ad37 0%, #98ec2d 100%);
+  color: white !important;
 }
 
 .dataTable-wrapper.no-footer .dataTable-container {
