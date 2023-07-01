@@ -1,18 +1,3 @@
-<script>
-  let selectedAccount = 0;
-
-  function setActiveAccount(id) {
-    selectedAccount = id;
-  }
-</script>
-
-<?php
-function getActiveAccount()
-{
-  return '<script>document.writeln(selectedAccount);</script>';
-}
-?>
-
 <div class="col-12">
   <div class="card">
     <div class="table-responsive">
