@@ -4,11 +4,13 @@ include "../assets/server/environment.php";
 include "../assets/server/url.php";
 include "../assets/server/auth.php";
 include "../assets/server/accounts/accountsList.php";
+include "../assets/server/accounts/deactivate.php";
 include "../../env.php";
 
 session_start();
 $connect = connectDatabase(getEnvironment());
 authBlock(getHost(getEnvironment()), getFullPath());
+deactivateAccount($connect);
 $accountsList = getAccountsList($connect, reset($_SESSION)['role_name']);
 
 include "../assets/server/logout.php";
@@ -52,7 +54,7 @@ include "../assets/server/logout.php";
     <?php include "../assets/components/organisms/navbar.php" ?>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-      <?php include "../assets/components/organisms/accountsList.php" ?>
+      <?php include "../assets/components/organisms/accounts/list.php" ?>
       <?php include "../assets/components/molecules/footer.php" ?>
     </div>
   </main>
