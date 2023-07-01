@@ -85,7 +85,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  transition: 0.2s;
+  transition: 0.2s !important;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -38311,3 +38311,16 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 /*# sourceMappingURL=dashboard-pro.css.map */
+
+.table-action .btn {
+  cursor: pointer;
+  transition: 0.2s !important;
+}
+
+.table-action .btn:hover {
+  color: #82d616;
+}
+
+.table-action .btn i {
+  transition: 0.025s !important;
+}

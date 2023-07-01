@@ -19,6 +19,7 @@
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số điện thoại</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Vai trò</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Trạng thái</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Hành động</th>
           </tr>
         </thead>
         <tbody>
@@ -44,6 +45,17 @@
                 <?php else : ?>
                   <span class="badge badge-sm bg-gradient-warning">Deactivated</span>
                 <?php endif ?>
+              </td>
+              <td class="table-action">
+                <div class="d-flex gap-2">
+                  <form method="POST">
+                    <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
+                    <input type="text" class="d-none" name="deactivateModal" value="true">
+                    <button type="submit" class="btn p-1 m-0">
+                      <i class="fas fa-user-alt-slash"></i>
+                    </button>
+                  </form>
+                </div>
               </td>
             </tr>
           <?php endforeach ?>
@@ -80,4 +92,31 @@
       <?php endif ?>
     </div>
   </div>
+  <?php if (isset($_POST['deactivateModal'])) : ?>
+    <div class="modal fade show" id="modal-deactivate" tabindex="-1" role="dialog" aria-labelledby="modal-deactivate" aria-hidden="false" style="display: block;" aria-modal="true">
+      <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="py-3 text-center">
+              <i class="fas fa-user-alt-slash fa-lg"></i>
+              <h4 class="text-gradient text-danger mt-4">Vô hiệu hoá tài khoản</h4>
+              <p>Bạn có chắc chắn muốn vô hiệu hoá tài khoản này?</p>
+              <p>Bạn vẫn có thể mở lại tài khoản bị vô hiệu hoá sau đó</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <form method="POST">
+              <button type="submit" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Đóng</button>
+            </form>
+            <form method="POST">
+              <input type="text" name="activeAccount" value="<?= $_POST['activeAccount'] ?>" class="d-none">
+              <input type="text" name="confirm" value="true" class="d-none">
+              <button type="submit" class="btn bg-gradient-warning">Đồng ý</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+  <?php endif ?>
 </div>
