@@ -2,6 +2,7 @@
 include "../assets/server/environment.php";
 include "../assets/server/url.php";
 include "../assets/server/auth.php";
+include "../../env.php";
 
 session_start();
 authBlock(getHost(getEnvironment()), getFullPath());
