@@ -1,7 +1,7 @@
 <?php
 function deactivateAccount($connect)
 {
-  if (isset($_POST['activeAccount']) && isset($_POST['confirm'])) {
+  if (isset($_POST['activeAccount']) && isset($_POST['confirmDeactivate'])) {
     $query = "UPDATE
                 `accounts`
               SET
