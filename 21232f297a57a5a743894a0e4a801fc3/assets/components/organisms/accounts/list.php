@@ -52,7 +52,14 @@
                     <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
                     <input type="text" class="d-none" name="deactivateModal" value="true">
                     <button type="submit" class="btn p-1 m-0">
-                      <i class="fas fa-user-alt-slash"></i>
+                      <i class="fas fa-user-alt-slash text-warning"></i>
+                    </button>
+                  </form>
+                  <form method="POST">
+                    <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
+                    <input type="text" class="d-none" name="deleteModal" value="true">
+                    <button type="submit" class="btn p-1 m-0">
+                      <i class="fas fa-user-times text-danger"></i>
                     </button>
                   </form>
                 </div>
@@ -110,8 +117,35 @@
             </form>
             <form method="POST">
               <input type="text" name="activeAccount" value="<?= $_POST['activeAccount'] ?>" class="d-none">
-              <input type="text" name="confirm" value="true" class="d-none">
+              <input type="text" name="confirmDeactivate" value="true" class="d-none">
               <button type="submit" class="btn bg-gradient-warning">Đồng ý</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+  <?php endif ?>
+  <?php if (isset($_POST['deleteModal'])) : ?>
+    <div class="modal fade show" id="modal-deactivate" tabindex="-1" role="dialog" aria-labelledby="modal-deactivate" aria-hidden="false" style="display: block;" aria-modal="true">
+      <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="py-3 text-center">
+              <i class="fas fa-user-times fa-lg"></i>
+              <h4 class="text-gradient text-danger mt-4">Xoá tài khoản</h4>
+              <p>Bạn có chắc chắn muốn xoá tài khoản này?</p>
+              <p>Bạn không thể mở khoá hay tạo một tài khoản mới với email của tài khoản đã bị khoá</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <form method="POST">
+              <button type="submit" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Đóng</button>
+            </form>
+            <form method="POST">
+              <input type="text" name="activeAccount" value="<?= $_POST['activeAccount'] ?>" class="d-none">
+              <input type="text" name="confirmDelete" value="true" class="d-none">
+              <button type="submit" class="btn bg-gradient-danger">Đồng ý</button>
             </form>
           </div>
         </div>

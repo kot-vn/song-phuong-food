@@ -10,6 +10,7 @@ function login($connect)
                   accounts.id,
                   accounts.display_name,
                   accounts.is_active,
+                  accounts.role_id,
                   roles.name AS role_name
               FROM
                   `accounts`

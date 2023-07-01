@@ -5,12 +5,14 @@ include "../assets/server/url.php";
 include "../assets/server/auth.php";
 include "../assets/server/accounts/accountsList.php";
 include "../assets/server/accounts/deactivate.php";
+include "../assets/server/accounts/delete.php";
 include "../../env.php";
 
 session_start();
 $connect = connectDatabase(getEnvironment());
 authBlock(getHost(getEnvironment()), getFullPath());
 deactivateAccount($connect);
+deleteAccount($connect);
 $accountsList = getAccountsList($connect, reset($_SESSION)['role_name']);
 
 include "../assets/server/logout.php";
