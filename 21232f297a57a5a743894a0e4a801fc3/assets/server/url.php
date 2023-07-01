@@ -2,7 +2,7 @@
 function getHost($environment)
 {
   if ($environment === "localhost") {
-    $path = "/song-phuong-food/";
+    $path = ($_ENV['RUNNER_HOST'] == 'xampp') ? '/song-phuong-food/' : '/';
   } else {
     $path = "/";
   }
