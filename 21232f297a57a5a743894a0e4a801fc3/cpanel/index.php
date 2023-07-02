@@ -1,11 +1,15 @@
 <?php
+include "../assets/server/databaseConnector.php";
 include "../assets/server/environment.php";
 include "../assets/server/url.php";
 include "../assets/server/auth.php";
 include "../../env.php";
 
 session_start();
-authBlock(getHost(getEnvironment()), getFullPath());
+$connect = connectDatabase(getEnvironment());
+authBlock(getHost(getEnvironment()), getFullPath(), [1, 2, 4]);
+permissionBlock($connect);
+authBlock(getHost(getEnvironment()), getFullPath(), [1, 2, 4]);
 
 include "../assets/server/logout.php";
 ?>

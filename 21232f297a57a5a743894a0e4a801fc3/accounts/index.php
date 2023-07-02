@@ -10,7 +10,9 @@ include "../../env.php";
 
 session_start();
 $connect = connectDatabase(getEnvironment());
-authBlock(getHost(getEnvironment()), getFullPath());
+authBlock(getHost(getEnvironment()), getFullPath(), [1, 4]);
+permissionBlock($connect);
+authBlock(getHost(getEnvironment()), getFullPath(), [1, 4]);
 deactivateAccount($connect);
 deleteAccount($connect);
 $accountsList = getAccountsList($connect, reset($_SESSION)['role_name']);

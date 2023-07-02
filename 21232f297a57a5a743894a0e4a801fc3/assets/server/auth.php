@@ -16,12 +16,62 @@ function authRedirect($path, $currentUrl)
   }
 }
 
-function authBlock($path, $currentUrl)
+function permissionBlock($connect)
+{
+  $query = "SELECT
+              accounts.id,
+              accounts.display_name,
+              accounts.is_active,
+              accounts.role_id,
+              roles.name AS role_name
+            FROM
+              `accounts`
+            INNER JOIN roles ON accounts.role_id = roles.id
+            WHERE
+              accounts.id = " . reset($_SESSION)['id'] . " AND accounts.deleted_at IS NULL";
+
+  $result = $connect->query($query);
+
+  if (mysqli_num_rows($result) == 0) {
+    unset($_SESSION['start']);
+    unset($_SESSION['expire']);
+    array_shift($_SESSION);
+  } else {
+    $result = mysqli_fetch_array($result);
+
+    unset($_SESSION['start']);
+    unset($_SESSION['expire']);
+    array_shift($_SESSION);
+
+    if ($result['is_active']) {
+      if ($result['role_name'] == "Admin") {
+        $_SESSION['admin'] = $result;
+      } else if ($result['role_name'] == "Employee") {
+        $_SESSION['employee'] = $result;
+      } else if ($result['role_name'] == "Super Admin") {
+        $_SESSION['super-admin'] = $result;
+      }
+      $_SESSION['start'] = time();
+      $_SESSION['expire'] = $_SESSION['start'] + (6 * 60 * 60);
+    }
+  }
+}
+
+function authBlock($path, $currentUrl, $permission)
 {
   $cpanelLocation = "21232f297a57a5a743894a0e4a801fc3";
 
   if (empty($_SESSION)) {
     $location = $path . $cpanelLocation . "/auth/login.php";
+
+    if ($currentUrl != $location) {
+      header("Location: $location", true, 301);
+      exit;
+    }
+  }
+
+  if (!in_array(reset($_SESSION)['role_id'], $permission)) {
+    $location = $path . $cpanelLocation . "/cpanel";
 
     if ($currentUrl != $location) {
       header("Location: $location", true, 301);
