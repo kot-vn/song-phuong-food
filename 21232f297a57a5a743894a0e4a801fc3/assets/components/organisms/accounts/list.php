@@ -48,20 +48,24 @@
               </td>
               <td class="table-action">
                 <div class="d-flex gap-2">
-                  <form method="POST">
-                    <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
-                    <input type="text" class="d-none" name="deactivateModal" value="true">
-                    <button type="submit" class="btn p-1 m-0">
-                      <i class="fas fa-user-alt-slash text-warning"></i>
-                    </button>
-                  </form>
-                  <form method="POST">
-                    <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
-                    <input type="text" class="d-none" name="deleteModal" value="true">
-                    <button type="submit" class="btn p-1 m-0">
-                      <i class="fas fa-user-times text-danger"></i>
-                    </button>
-                  </form>
+                  <?php if ($account['is_active'] && !$account['deleted_at']) : ?>
+                    <form method="POST">
+                      <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
+                      <input type="text" class="d-none" name="deactivateModal" value="true">
+                      <button type="submit" class="btn p-1 m-0">
+                        <i class="fas fa-user-alt-slash text-warning"></i>
+                      </button>
+                    </form>
+                  <?php endif ?>
+                  <?php if (!$account['deleted_at']) : ?>
+                    <form method="POST">
+                      <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
+                      <input type="text" class="d-none" name="deleteModal" value="true">
+                      <button type="submit" class="btn p-1 m-0">
+                        <i class="fas fa-user-times text-danger"></i>
+                      </button>
+                    </form>
+                  <?php endif ?>
                 </div>
               </td>
             </tr>
