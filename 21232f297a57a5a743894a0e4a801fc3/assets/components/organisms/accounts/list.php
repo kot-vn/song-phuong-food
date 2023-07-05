@@ -1,17 +1,23 @@
 <div class="col-12">
   <div class="card">
+    <form method="get">
+      <div class="w-100 d-flex justify-content-end p-3 gap-2">
+        <div class="input-group w-sm-25">
+          <span class="input-group-text text-body">
+            <i class="fas fa-search" aria-hidden="true"></i>
+          </span>
+          <input type="text" name="name" class="form-control" placeholder="Tìm theo tên...">
+        </div>
+        <button class="btn btn-icon btn-3 bg-gradient-success mb-0" type="button" onclick="location.href='create'">
+          <span class="btn-inner--icon">
+            <i class="fas fa-user-plus"></i>
+          </span>
+          <span class="btn-inner--text d-none d-sm-inline">Tạo tài khoản</span>
+        </button>
+      </div>
+    </form>
     <div class="table-responsive">
       <table class="table align-items-center mb-0">
-        <form method="get">
-          <div class="w-100 d-flex justify-content-end p-3">
-            <div class="input-group w-25">
-              <span class="input-group-text text-body">
-                <i class="fas fa-search" aria-hidden="true"></i>
-              </span>
-              <input type="text" name="name" class="form-control" placeholder="Tìm theo tên...">
-            </div>
-          </div>
-        </form>
         <thead>
           <tr>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
