@@ -1,23 +1,19 @@
 <?php
-include "../assets/server/databaseConnector.php";
-include "../assets/server/environment.php";
-include "../assets/server/url.php";
-include "../assets/server/auth.php";
-include "../assets/server/accounts/accountsList.php";
-include "../assets/server/accounts/deactivate.php";
-include "../assets/server/accounts/delete.php";
-include "../../env.php";
+include "../../assets/server/databaseConnector.php";
+include "../../assets/server/environment.php";
+include "../../assets/server/url.php";
+include "../../assets/server/auth.php";
+include "../../assets/server/accounts/create.php";
+include "../../../env.php";
 
 session_start();
 $connect = connectDatabase(getEnvironment());
 authBlock(getHost(getEnvironment()), getFullPath(), [1, 4]);
 permissionBlock($connect);
 authBlock(getHost(getEnvironment()), getFullPath(), [1, 4]);
-deactivateAccount($connect);
-deleteAccount($connect);
-$accountsList = getAccountsList($connect, reset($_SESSION)['role_name']);
+$error = createAccount($connect, getHost(getEnvironment()), getFullPath());
 
-include "../assets/server/logout.php";
+include "../../assets/server/logout.php";
 ?>
 
 <!DOCTYPE html>
@@ -58,17 +54,17 @@ include "../assets/server/logout.php";
     <?php include getPageFloor(0) . "assets/components/organisms/navbar.php" ?>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-      <?php include getPageFloor(0) . "assets/components/organisms/accounts/list.php" ?>
+      <?php include getPageFloor(0) . "assets/components/organisms/accounts/create.php" ?>
       <?php include getPageFloor(0) . "assets/components/molecules/footer.php" ?>
     </div>
   </main>
-  <?php if (getEnvironment() == "localhost") include "../assets/components/organisms/fixedPlugin.php" ?>
+  <?php if (getEnvironment() == "localhost") include getPageFloor(0) . "assets/components/organisms/fixedPlugin.php" ?>
   <!--   Core JS Files   -->
   <script src="<?= getPageFloor(0) ?>assets/js/core/popper.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/core/bootstrap.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="<?= getPageFloor(0) ?>assets/js/plugins/datatables.js"></script>
+  <script src="<?= getPageFloor(0) ?>assets/js/plugins/multistep-form.js"></script>
   <!-- Kanban scripts -->
   <script src="<?= getPageFloor(0) ?>assets/js/plugins/dragula/dragula.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/plugins/jkanban/jkanban.js"></script>
@@ -85,6 +81,7 @@ include "../assets/server/logout.php";
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="<?= getPageFloor(0) ?>assets/js/soft-ui-dashboard.min.js?v=1.1.1"></script>
+  <?php if (!empty($error)) echo "<script type='text/JavaScript'>setActivePanel(0);setActivePanel(1)</script>" ?>
 </body>
 
 </html>

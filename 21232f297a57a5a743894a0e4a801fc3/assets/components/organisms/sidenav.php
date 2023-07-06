@@ -5,7 +5,8 @@ $menuData = '[
   {
       "nav-link": "cpanel/",
       "nav-icon": "fas fa-tachometer-alt",
-      "nav-link-text": "Dashboard",
+      "nav-link-text": "Thống kê",
+      "nav-id": "dashboard",
       "nav-permission": ["Admin","Employee","Super Admin"],
       "has-child": false,
       "nav-child": []
@@ -13,14 +14,25 @@ $menuData = '[
   {
     "nav-link": "accounts/",
     "nav-icon": "fas fa-user",
-    "nav-link-text": "Accounts",
+    "nav-link-text": "Tài khoản",
+    "nav-id": "accounts",
     "nav-permission": ["Admin","Super Admin"],
     "has-child": true,
     "nav-child": [
       {
         "nav-link": "accounts/",
         "nav-icon": "fa-tachometer-alt",
-        "nav-link-text": "List",
+        "nav-link-text": "Danh sách",
+        "nav-id": "list",
+        "nav-permission": ["Admin","Super Admin"],
+        "has-child": false,
+        "nav-child": []
+      },
+      {
+        "nav-link": "accounts/create/",
+        "nav-icon": "fas fa-user-plus",
+        "nav-link-text": "Tạo mới",
+        "nav-id": "create",
         "nav-permission": ["Admin","Super Admin"],
         "has-child": false,
         "nav-child": []
@@ -48,11 +60,11 @@ $menuList = json_decode($menuData, true);
             <a data-bs-toggle="<?php if ($navItem['has-child']) {
                                   echo 'collapse';
                                 } ?>" href="<?php if ($navItem['has-child']) {
-                                              echo '#' . $navItem['nav-link-text'];
+                                              echo '#' . $navItem['nav-id'];
                                             } else {
                                               echo getPageFloor(0) . $navItem['nav-link'];
                                             }  ?>" class="nav-link <?php if (isUrlActive($navItem['nav-link'])) echo 'active' ?>" aria-controls="<?php if ($navItem['has-child']) {
-                                                                                                                                                    echo $navItem['nav-link-text'];
+                                                                                                                                                    echo $navItem['nav-id'];
                                                                                                                                                   }  ?>" role="button" aria-expanded="false">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                 <i class="<?php if (isUrlActive($navItem['nav-link'])) {
@@ -66,7 +78,7 @@ $menuList = json_decode($menuData, true);
               </span>
             </a>
             <div class="collapse <?php if (isUrlActive($navItem['nav-link'])) echo 'show' ?>" id="<?php if ($navItem['has-child']) {
-                                                                                                    echo $navItem['nav-link-text'];
+                                                                                                    echo $navItem['nav-id'];
                                                                                                   } ?>">
               <ul class="nav ms-4 ps-3">
                 <?php foreach ($navItem['nav-child'] as $navChildItem) : ?>
@@ -75,7 +87,7 @@ $menuList = json_decode($menuData, true);
                       <a class="nav-link <?php if (isUrlActive($navChildItem['nav-link'])) echo 'active' ?>" data-bs-toggle="<?php if ($navChildItem['has-child']) {
                                                                                                                                 echo 'collapse';
                                                                                                                               } ?>" aria-expanded="false" href="<?php if ($navChildItem['has-child']) {
-                                                                                                                                                                  echo '#' . $navChildItem['nav-link-text'];
+                                                                                                                                                                  echo '#' . $navChildItem['nav-id'];
                                                                                                                                                                 } else {
                                                                                                                                                                   echo getPageFloor(0) . $navChildItem['nav-link'];
                                                                                                                                                                 }  ?>">
@@ -88,7 +100,7 @@ $menuList = json_decode($menuData, true);
                         </span>
                       </a>
                       <div class="collapse <?php if (isUrlActive($navChildItem['nav-link'])) echo 'show' ?>" id="<?php if ($navChildItem['has-child']) {
-                                                                                                                    echo $navChildItem['nav-link-text'];
+                                                                                                                    echo $navChildItem['nav-id'];
                                                                                                                   } ?>">
                         <ul class="nav nav-sm flex-column">
                           <?php foreach ($navChildItem['nav-child'] as $navGrandChildItem) : ?>
@@ -117,9 +129,5 @@ $menuList = json_decode($menuData, true);
       <?php endforeach ?>
     </ul>
   </div>
-  <?php if (!@include "../molecules/sidenavFooter.php") {
-    include "../assets/components/molecules/sidenavFooter.php";
-  } else {
-    include "../molecules/sidenavFooter.php";
-  } ?>
+  <?php include getPageFloor(0) . "assets/components/molecules/sidenavFooter.php" ?>
 </aside>
