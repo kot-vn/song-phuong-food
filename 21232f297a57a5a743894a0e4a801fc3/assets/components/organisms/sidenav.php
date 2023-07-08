@@ -1,6 +1,6 @@
 <?php
 // max 3 layers 
-// nav-permission: Admin, Employee
+// nav-permission: Admin, Employee, Super Admin
 $menuData = '[
   {
       "nav-link": "cpanel/",
@@ -16,12 +16,11 @@ $menuData = '[
     "nav-icon": "fas fa-user",
     "nav-link-text": "Tài khoản",
     "nav-id": "accounts",
-    "nav-permission": ["Admin","Super Admin"],
+    "nav-permission": ["Admin","Super Admin","Employee"],
     "has-child": true,
     "nav-child": [
       {
         "nav-link": "accounts/",
-        "nav-icon": "fa-tachometer-alt",
         "nav-link-text": "Danh sách",
         "nav-id": "list",
         "nav-permission": ["Admin","Super Admin"],
@@ -30,10 +29,17 @@ $menuData = '[
       },
       {
         "nav-link": "accounts/create/",
-        "nav-icon": "fas fa-user-plus",
         "nav-link-text": "Tạo mới",
         "nav-id": "create",
         "nav-permission": ["Admin","Super Admin"],
+        "has-child": false,
+        "nav-child": []
+      },
+      {
+        "nav-link": "accounts/detail/",
+        "nav-link-text": "Chi tiết",
+        "nav-id": "detail",
+        "nav-permission": ["Admin","Super Admin","Employee"],
         "has-child": false,
         "nav-child": []
       }

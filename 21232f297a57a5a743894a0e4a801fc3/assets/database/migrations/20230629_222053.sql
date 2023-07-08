@@ -52,4 +52,4 @@ VALUES (
         NULL,
         NULL,
         NULL
-    )
+    );

@@ -10,7 +10,7 @@
       <ul class="navbar-nav  justify-content-end">
         <?php include getPageFloor(0) . "assets/components/atoms/envMark.php" ?>
         <li class="nav-item d-flex align-items-center">
-          <a href="<?= getPageFloor(1) ?>account" class="nav-link text-body font-weight-bold px-0">
+          <a href="<?= getPageFloor(0) ?>accounts/detail" class="nav-link text-body font-weight-bold px-0">
             <i class="fa fa-user me-sm-1"></i>
             <span class="d-sm-inline d-none">
               <?= reset($_SESSION)['display_name'] ?>

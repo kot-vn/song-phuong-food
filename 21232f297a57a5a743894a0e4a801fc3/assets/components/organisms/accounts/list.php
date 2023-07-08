@@ -54,6 +54,12 @@
               </td>
               <td class="table-action">
                 <div class="d-flex gap-2">
+                  <form action="<?= getPageFloor(0) . "accounts/detail/" ?>" method="POST">
+                    <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
+                    <button type="submit" class="btn p-1 m-0">
+                      <i class="fas fa-user-edit text-secondary"></i>
+                    </button>
+                  </form>
                   <?php if ($account['is_active'] && !$account['deleted_at']) : ?>
                     <form method="POST">
                       <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
