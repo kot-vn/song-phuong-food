@@ -30,6 +30,6 @@ VALUES (
         NULL,
         '2023-06-29',
         '3'
-    )
-ALTER TABLE `accounts`
-ADD INDEX(`is_active`);
+    );
+
+ALTER TABLE `accounts` ADD INDEX(`is_active`);

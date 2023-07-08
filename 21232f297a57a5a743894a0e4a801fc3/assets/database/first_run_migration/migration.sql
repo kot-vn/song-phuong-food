@@ -460,7 +460,8 @@ VALUES (
         NULL,
         NULL,
         NULL
-    )SET time_zone = "+00:00";
+    );
+SET time_zone = "+00:00";
 
 INSERT INTO
     `accounts` (
@@ -492,9 +493,10 @@ VALUES (
         NULL,
         '2023-06-29',
         '3'
-    )
-ALTER TABLE `accounts`
-ADD INDEX(`is_active`);SET time_zone = "+00:00";
+    );
+
+ALTER TABLE `accounts` ADD INDEX(`is_active`);
+SET time_zone = "+00:00";
 
 ALTER TABLE
     `accounts` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;
