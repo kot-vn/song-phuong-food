@@ -30,5 +30,5 @@ function getAccountsList($connect, $role)
 
   $totalPages = mysqli_num_rows($result) != 0 ? mysqli_fetch_array($result)['total_records'] / $perPage : 0;
 
-  return  ['result' => $result, 'page' => $page, 'pages' => $totalPages];
+  return  ['result' => $result, 'page' => $page, 'pages' => ceil($totalPages)];
 }
