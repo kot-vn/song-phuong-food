@@ -48,6 +48,10 @@ include "../assets/server/logout.php";
     .embed-page {
       height: calc(100vh - 300px);
     }
+
+    .ld-w {
+      width: 50px;
+    }
   </style>
 </head>
 
@@ -59,7 +63,12 @@ include "../assets/server/logout.php";
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="embed-page w-100">
-        <embed type="text/html" src="https://nepcha.com/site/songphuongfood.com" width="100%" height="100%">
+        <div id="loadingImage" class="h-100">
+          <div class="d-flex h-100 justify-content-center align-items-center">
+            <img src="https://nepcha.com/site/_nuxt/loading.fcbaa9d1.gif" class="ld-w" />
+          </div>
+        </div>
+        <iframe id="landingPage" type="text/html" src='https://nepcha.com/site/songphuongfood.com' width="100%" height="100%"></iframe>
       </div>
       <?php include getPageFloor(0) . "assets/components/molecules/footer.php" ?>
     </div>
@@ -89,6 +98,20 @@ include "../assets/server/logout.php";
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="<?= getPageFloor(0) ?>assets/js/soft-ui-dashboard.min.js?v=1.1.1"></script>
+  <script>
+    // Get references to the image and loading page
+    const loadingImage = document.getElementById('loadingImage');
+    const landingPage = document.getElementById('landingPage');
+
+    // Hide the landing page content initially
+    landingPage.style.display = 'none';
+
+    // Show the content and hide the loading image after the page has finished loading
+    landingPage.addEventListener('load', () => {
+      loadingImage.style.display = 'none';
+      landingPage.style.display = 'block';
+    });
+  </script>
 </body>
 
 </html>
