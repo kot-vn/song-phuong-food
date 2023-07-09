@@ -7,7 +7,7 @@ $menuData = '[
       "nav-icon": "fas fa-tachometer-alt",
       "nav-link-text": "Thống kê",
       "nav-id": "dashboard",
-      "nav-permission": ["Admin","Employee","Super Admin"],
+      "nav-permission": [1,2,4],
       "has-child": false,
       "nav-child": []
   },
@@ -16,14 +16,14 @@ $menuData = '[
     "nav-icon": "fas fa-user",
     "nav-link-text": "Tài khoản",
     "nav-id": "accounts",
-    "nav-permission": ["Admin","Super Admin","Employee"],
+    "nav-permission": [1,2,4],
     "has-child": true,
     "nav-child": [
       {
         "nav-link": "accounts/",
         "nav-link-text": "Danh sách",
         "nav-id": "list",
-        "nav-permission": ["Admin","Super Admin"],
+        "nav-permission": [1,4],
         "has-child": false,
         "nav-child": []
       },
@@ -31,7 +31,7 @@ $menuData = '[
         "nav-link": "accounts/create/",
         "nav-link-text": "Tạo mới",
         "nav-id": "create",
-        "nav-permission": ["Admin","Super Admin"],
+        "nav-permission": [1,4],
         "has-child": false,
         "nav-child": []
       },
@@ -39,7 +39,7 @@ $menuData = '[
         "nav-link": "accounts/detail/",
         "nav-link-text": "Chi tiết",
         "nav-id": "detail",
-        "nav-permission": ["Admin","Super Admin","Employee"],
+        "nav-permission": [1,2,4],
         "has-child": false,
         "nav-child": []
       }
@@ -61,7 +61,7 @@ $menuList = json_decode($menuData, true);
   <div class="collapse navbar-collapse pb-5 w-auto h-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
       <?php foreach ($menuList as $navItem) : ?>
-        <?php if (in_array(reset($_SESSION)['role_name'], $navItem['nav-permission'])) : ?>
+        <?php if (in_array(reset($_SESSION)['role_id'], $navItem['nav-permission'])) : ?>
           <li class="nav-item">
             <a data-bs-toggle="<?php if ($navItem['has-child']) {
                                   echo 'collapse';
@@ -88,7 +88,7 @@ $menuList = json_decode($menuData, true);
                                                                                                   } ?>">
               <ul class="nav ms-4 ps-3">
                 <?php foreach ($navItem['nav-child'] as $navChildItem) : ?>
-                  <?php if (in_array(reset($_SESSION)['role_name'], $navChildItem['nav-permission'])) : ?>
+                  <?php if (in_array(reset($_SESSION)['role_id'], $navChildItem['nav-permission'])) : ?>
                     <li class="nav-item ">
                       <a class="nav-link <?php if (isUrlActive($navChildItem['nav-link'])) echo 'active' ?>" data-bs-toggle="<?php if ($navChildItem['has-child']) {
                                                                                                                                 echo 'collapse';
@@ -110,7 +110,7 @@ $menuList = json_decode($menuData, true);
                                                                                                                   } ?>">
                         <ul class="nav nav-sm flex-column">
                           <?php foreach ($navChildItem['nav-child'] as $navGrandChildItem) : ?>
-                            <?php if (in_array(reset($_SESSION)['role_name'], $navGrandChildItem['nav-permission'])) : ?>
+                            <?php if (in_array(reset($_SESSION)['role_id'], $navGrandChildItem['nav-permission'])) : ?>
                               <li class="nav-item">
                                 <a class="nav-link <?php if (isUrlActive($navGrandChildItem['nav-link'])) echo 'active' ?>" href="<?= getPageFloor(0) . $navGrandChildItem['nav-link'] ?>">
                                   <span class="sidenav-mini-icon text-xs">

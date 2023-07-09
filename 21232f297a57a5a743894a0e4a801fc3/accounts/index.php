@@ -15,7 +15,7 @@ permissionBlock($connect);
 authBlock(getHost(getEnvironment()), getFullPath(), [1, 4]);
 deactivateAccount($connect);
 deleteAccount($connect);
-$accountsList = getAccountsList($connect, reset($_SESSION)['role_name']);
+$accountsList = getAccountsList($connect, reset($_SESSION)['role_id']);
 
 include "../assets/server/logout.php";
 ?>

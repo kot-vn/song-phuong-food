@@ -44,11 +44,11 @@ function permissionBlock($connect)
     array_shift($_SESSION);
 
     if ($result['is_active']) {
-      if ($result['role_name'] == "Admin") {
+      if ($result['role_id'] == 1) {
         $_SESSION['admin'] = $result;
-      } else if ($result['role_name'] == "Employee") {
+      } else if ($result['role_id'] == 2) {
         $_SESSION['employee'] = $result;
-      } else if ($result['role_name'] == "Super Admin") {
+      } else if ($result['role_id'] == 4) {
         $_SESSION['super-admin'] = $result;
       }
       $_SESSION['start'] = time();

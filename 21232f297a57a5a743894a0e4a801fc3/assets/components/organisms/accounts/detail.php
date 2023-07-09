@@ -69,7 +69,7 @@
               <label class="form-label mt-4">Loại tài khoản</label>
               <select class="form-control" name="role" id="role" required="required">
                 <?php if (reset($_SESSION)['role_id'] != 2) : ?>
-                  <option value="1" <?= $accountDetail['role_id'] == 1 ? "selected" : "" ?>>Admin</option>
+                  <option value="1" <?= $accountDetail['role_id'] == 1 ? "selected" : "" ?>>Quản lý</option>
                   <?php if (reset($_SESSION)['role_id'] == 4) : ?>
                     <option value="4" <?= $accountDetail['role_id'] == 4 ? "selected" : "" ?>>Super Admin</option>
                   <?php endif ?>
