@@ -23,7 +23,7 @@ $menuData = '[
         "nav-link": "accounts/",
         "nav-icon": "fa-tachometer-alt",
         "nav-link-text": "Danh sách",
-        "nav-id": "list",
+        "nav-id": "accounts",
         "nav-permission": ["Admin","Super Admin"],
         "has-child": false,
         "nav-child": []
@@ -42,9 +42,11 @@ $menuData = '[
 ]';
 $menuList = json_decode($menuData, true);
 
-function isCreate($navId)
+function actionSide($navItem)
 {
-  return (isUrlActive("create") && $navId == "list");
+  if (basename(getFullPath()) == $navItem['nav-id'] && isUrlActive($navItem['nav-link'])) {
+    echo 'active';
+  }
 }
 ?>
 
@@ -102,16 +104,14 @@ function isCreate($navId)
               <ul class="nav ms-4 ps-3">
                 <?php foreach ($navItem['nav-child'] as $navChildItem): ?>
                   <?php if (in_array(reset($_SESSION)['role_name'], $navChildItem['nav-permission'])): ?>
-                    <li class="nav-item <?php if (isCreate($navChildItem['nav-id']))
-                      echo 'd-none' ?>">
-                      <a class="nav-link <?php if (isUrlActive($navChildItem['nav-link']))
-                      echo 'active' ?>" data-bs-toggle="<?php if ($navChildItem['has-child']) {
-                      echo 'collapse';
-                    } ?>" style="display: n" aria-expanded="false" href="<?php if ($navChildItem['has-child']) {
-                       echo '#' . $navChildItem['nav-id'];
-                     } else {
-                       echo getPageFloor(0) . $navChildItem['nav-link'];
-                     } ?>">
+                    <li class="nav-item ">
+                      <a class="nav-link <?php actionSide($navChildItem); ?>" data-bs-toggle="<?php if ($navChildItem['has-child']) {
+                          echo 'collapse';
+                        } ?>" style="display: n" aria-expanded="false" href="<?php if ($navChildItem['has-child']) {
+                           echo '#' . $navChildItem['nav-id'];
+                         } else {
+                           echo getPageFloor(0) . $navChildItem['nav-link'];
+                         } ?>">
 
                         <span class="sidenav-mini-icon">
                           <?= substr($navChildItem['nav-link-text'], 0, 1) ?>
