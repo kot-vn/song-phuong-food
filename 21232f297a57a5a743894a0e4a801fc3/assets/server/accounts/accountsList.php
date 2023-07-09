@@ -1,5 +1,5 @@
 <?php
-function getAccountsList($connect, $role)
+function getAccountsList($connect, $role, $path, $currentUrl)
 {
   $query = "SELECT
               accounts.id,
@@ -29,6 +29,8 @@ function getAccountsList($connect, $role)
   $result = $connect->query($query);
 
   $totalPages = mysqli_num_rows($result) != 0 ? mysqli_fetch_array($result)['total_records'] / $perPage : 0;
+
+  if (isset($_GET['page']) && mysqli_num_rows($result) == 0) redirect('accounts', $path, $currentUrl);;
 
   return  ['result' => $result, 'page' => $page, 'pages' => ceil($totalPages)];
 }
