@@ -13,8 +13,8 @@ function getAccountsList($connect, $role)
               accounts
             INNER JOIN roles ON accounts.role_id = roles.id";
 
-  if ($role == "Super Admin") $query .= " WHERE accounts.role_id IN (1, 2)";
-  if ($role == "Admin") $query .= " WHERE accounts.role_id = 2 AND accounts.deleted_at IS NULL";
+  if ($role == 4) $query .= " WHERE accounts.role_id IN (1, 2)";
+  if ($role == 1) $query .= " WHERE accounts.role_id = 2 AND accounts.deleted_at IS NULL";
   if (isset($_GET['name'])) $query .= " AND accounts.display_name LIKE '%" . $_GET['name'] . "%'";
 
   $page = 1;
