@@ -13,8 +13,8 @@ function getAccountsList($connect, $role)
               accounts
             INNER JOIN roles ON accounts.role_id = roles.id";
 
-  if ($role == "Super Admin") $query .= " WHERE accounts.role_id IN (1, 2)";
-  if ($role == "Admin") $query .= " WHERE accounts.role_id = 2 AND accounts.deleted_at IS NULL";
+  if ($role == 4) $query .= " WHERE accounts.role_id IN (1, 2)";
+  if ($role == 1) $query .= " WHERE accounts.role_id = 2 AND accounts.deleted_at IS NULL";
   if (isset($_GET['name'])) $query .= " AND accounts.display_name LIKE '%" . $_GET['name'] . "%'";
 
   $page = 1;
@@ -30,5 +30,5 @@ function getAccountsList($connect, $role)
 
   $totalPages = mysqli_num_rows($result) != 0 ? mysqli_fetch_array($result)['total_records'] / $perPage : 0;
 
-  return  ['result' => $result, 'page' => $page, 'pages' => $totalPages];
+  return  ['result' => $result, 'page' => $page, 'pages' => ceil($totalPages)];
 }

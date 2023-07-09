@@ -31,7 +31,7 @@
                     <label>Loại tài khoản</label>
                     <select class="multisteps-form__select form-control" name="role">
                       <?php if (reset($_SESSION)['role_id'] == 4) : ?>
-                        <option value="1">Admin</option>
+                        <option value="1">Quản lý</option>
                       <?php endif ?>
                       <option value="2" selected>Nhân viên</option>
                     </select>
