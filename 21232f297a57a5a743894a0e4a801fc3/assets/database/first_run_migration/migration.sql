@@ -1,6 +1,8 @@
 CREATE DATABASE songphuongfood;
 
-USE songphuongfood;SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+USE songphuongfood;
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 
 START TRANSACTION;
 
@@ -296,7 +298,9 @@ VALUES (
         NULL,
         NULL,
         NULL
-    );INSERT INTO
+    );
+
+INSERT INTO
     `accounts` (
         `id`,
         `email`,
@@ -362,7 +366,9 @@ VALUES (
         NULL,
         NULL,
         NULL
-    );ALTER TABLE `accounts` DROP `last_login`;
+    );
+
+ALTER TABLE `accounts` DROP `last_login`;
 
 CREATE TABLE
     `access_log` (
@@ -378,7 +384,9 @@ ALTER TABLE `access_log`
 ADD
     `account_id` BIGINT NOT NULL AFTER `id`;
 
-ALTER TABLE `access_log` ADD INDEX(`account_id`);SET time_zone = "+00:00";
+ALTER TABLE `access_log` ADD INDEX(`account_id`);
+
+SET time_zone = "+00:00";
 
 ALTER TABLE `access_log`
 ADD
@@ -401,11 +409,16 @@ ALTER TABLE
 
 ALTER TABLE `access_log`
 ADD
-    `os_platform` VARCHAR(255) NULL AFTER `browser_name`;SET time_zone = "+00:00";
+    `os_platform` VARCHAR(255) NULL AFTER `browser_name`;
 
-ALTER TABLE `accounts` DROP `address`;SET time_zone = "+00:00";
+SET time_zone = "+00:00";
+
+ALTER TABLE `accounts` DROP `address`;
+
+SET time_zone = "+00:00";
 
 ALTER TABLE `access_log` DROP COLUMN `device_name`;
+
 SET time_zone = "+00:00";
 
 INSERT INTO
@@ -461,6 +474,7 @@ VALUES (
         NULL,
         NULL
     );
+
 SET time_zone = "+00:00";
 
 INSERT INTO
@@ -496,6 +510,7 @@ VALUES (
     );
 
 ALTER TABLE `accounts` ADD INDEX(`is_active`);
+
 SET time_zone = "+00:00";
 
 ALTER TABLE
@@ -530,3 +545,19 @@ ALTER TABLE
 
 ALTER TABLE
     `shops` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;
+
+SET time_zone = "+00:00";
+
+UPDATE `roles`
+SET
+    `name` = 'Nhân viên',
+    `updated_at` = '2023-07-09 15:46:00',
+    `updated_by` = '3'
+WHERE `roles`.`id` = 2;
+
+UPDATE `roles`
+SET
+    `name` = 'Quản lý',
+    `updated_at` = '2023-07-09 15:46:42',
+    `updated_by` = '3'
+WHERE `roles`.`id` = 1;
