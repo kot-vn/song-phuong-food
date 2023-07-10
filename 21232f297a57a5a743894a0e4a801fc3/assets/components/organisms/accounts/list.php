@@ -96,11 +96,45 @@
                 </a>
               </li>
             <?php endif ?>
-            <?php for ($i = 1; $i <= $accountsList['pages']; $i++) : ?>
-              <li class="page-item <?= (empty($_GET['page']) && $i == 1) || (isset($_GET['page']) && $_GET['page'] == $i) ? 'active' : "" ?>">
-                <a class="page-link" href='<?= (isset($_GET['name']) ? '?name=' . $_GET['name'] . '&page=' : '?page=') . $i ?>'><?= $i ?></a>
+            <?php if ($accountsList['page'] == 4 || $accountsList['page'] > 5) : ?>
+              <li class="page-item <?= (empty($_GET['page'])) || (isset($_GET['page']) && $_GET['page'] == 1) ? 'active' : "" ?>">
+                <a class="page-link" href='<?= (isset($_GET['name']) ? '?name=' . $_GET['name'] . '&page=' : '?page=') . "1" ?>'>1</a>
               </li>
+            <?php endif; ?>
+            <?php for ($i = 1; $i <= 2; $i++) : ?>
+              <?php if ($accountsList['page'] == 5) : ?>
+                <li class="page-item <?= (empty($_GET['page']) && $i == 1) || (isset($_GET['page']) && $_GET['page'] == $i) ? 'active' : "" ?>">
+                  <a class="page-link" href='<?= (isset($_GET['name']) ? '?name=' . $_GET['name'] . '&page=' : '?page=') . $i ?>'><?= $i ?></a>
+                </li>
+              <?php endif ?>
             <?php endfor; ?>
+            <?php if ($accountsList['page'] > 5) : ?>
+              <li class="page-item">
+                <a class="page-link" href='#'>...</a>
+              </li>
+            <?php endif ?>
+            <?php for ($i = 1; $i <= $accountsList['pages']; $i++) : ?>
+              <?php if ($i <= $accountsList['page'] + 2 && $i >= $accountsList['page'] - 2) : ?>
+                <li class="page-item <?= (empty($_GET['page']) && $i == 1) || (isset($_GET['page']) && $_GET['page'] == $i) ? 'active' : "" ?>">
+                  <a class="page-link" href='<?= (isset($_GET['name']) ? '?name=' . $_GET['name'] . '&page=' : '?page=') . $i ?>'><?= $i ?></a>
+                </li>
+              <?php endif ?>
+            <?php endfor; ?>
+            <?php if ($accountsList['page'] <= $accountsList['pages'] - 5) : ?>
+              <li class="page-item">
+                <a class="page-link" href='#'>...</a>
+              </li>
+            <?php endif ?>
+            <?php if ($accountsList['page'] == $accountsList['pages'] - 4) : ?>
+              <li class="page-item <?= (empty($_GET['page'])) || (isset($_GET['page']) && $_GET['page'] == $accountsList['pages'] - 1) ? 'active' : "" ?>">
+                <a class="page-link" href='<?= (isset($_GET['name']) ? '?name=' . $_GET['name'] . '&page=' : '?page=') . $accountsList['pages'] - 1 ?>'><?= $accountsList['pages'] - 1 ?></a>
+              </li>
+            <?php endif; ?>
+            <?php if ($accountsList['page'] <= $accountsList['pages'] - 3 || $accountsList['page'] < $accountsList['pages'] - 4) : ?>
+              <li class="page-item <?= (isset($_GET['page']) && $_GET['page'] == $accountsList['pages']) ? 'active' : "" ?>">
+                <a class="page-link" href='<?= (isset($_GET['name']) ? '?name=' . $_GET['name'] . '&page=' : '?page=') . $accountsList['pages'] ?>'><?= $accountsList['pages'] ?></a>
+              </li>
+            <?php endif; ?>
             <?php if ($accountsList['page'] < $accountsList['pages']) : ?>
               <li class="page-item">
                 <a class="page-link" href="<?= (isset($_GET['name']) ? '?name=' . $_GET['name'] . '&page=' : '?page=') . $accountsList['page'] + 1 ?>" aria-label="Next">
