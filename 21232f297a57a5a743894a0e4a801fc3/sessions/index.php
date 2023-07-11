@@ -1,29 +1,19 @@
 <?php
-include "../../assets/server/databaseConnector.php";
-include "../../assets/server/environment.php";
-include "../../assets/server/url.php";
-include "../../assets/server/auth.php";
-include "../../assets/server/accounts/detail.php";
-include "../../assets/server/accounts/updateBasic.php";
-include "../../assets/server/accounts/changgPassword.php";
-include "../../assets/server/accounts/deactivate.php";
-include "../../assets/server/accounts/delete.php";
-include "../../assets/server/accounts/sessions.php";
-include "../../../env.php";
+include "../assets/server/databaseConnector.php";
+include "../assets/server/environment.php";
+include "../assets/server/url.php";
+include "../assets/server/auth.php";
+include "../assets/server/sessions/list.php";
+include "../../env.php";
 
 session_start();
 $connect = connectDatabase(getEnvironment());
-authBlock(getHost(getEnvironment()), getFullPath(), [1, 2, 4]);
+authBlock(getHost(getEnvironment()), getFullPath(), [1, 4]);
 permissionBlock($connect);
-authBlock(getHost(getEnvironment()), getFullPath(), [1, 2, 4]);
-updateBasicInfo($connect);
-deactivateAccount($connect);
-deleteAccount($connect);
-$error = changePassword($connect);
-$accountDetail = getAccountDetail($connect);
-$sessions = getAccountSessionsList($connect);
+authBlock(getHost(getEnvironment()), getFullPath(), [1, 4]);
+$sessions = getSessionsList($connect, getHost(getEnvironment()), getFullPath());
 
-include "../../assets/server/logout.php";
+include "../assets/server/logout.php";
 ?>
 
 <!DOCTYPE html>
@@ -57,33 +47,27 @@ include "../../assets/server/logout.php";
   <link id="pagestyle" href="<?= getPageFloor(0) ?>assets/css/soft-ui-dashboard.css?v=1.1.1" rel="stylesheet" />
 </head>
 
-<body class="g-sidenav-show bg-gray-100">
+<body class="g-sidenav-show  bg-gray-100">
   <?php include getPageFloor(0) . "assets/components/organisms/sidenav.php" ?>
-  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <?php include getPageFloor(0) . "assets/components/organisms/navbar.php" ?>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-      <?php include getPageFloor(0) . "assets/components/organisms/accounts/detail.php" ?>
+      <?php include getPageFloor(0) . "assets/components/organisms/sessions/list.php" ?>
       <?php include getPageFloor(0) . "assets/components/molecules/footer.php" ?>
     </div>
   </main>
-  <?php if (getEnvironment() == "dev") include getPageFloor(0) . "assets/components/organisms/fixedPlugin.php" ?>
+  <?php if (getEnvironment() == "localhost") include getPageFloor(0) . "assets/components/organisms/fixedPlugin.php" ?>
   <!--   Core JS Files   -->
   <script src="<?= getPageFloor(0) ?>assets/js/core/popper.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/core/bootstrap.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="<?= getPageFloor(0) ?>assets/js/plugins/choices.min.js"></script>
+  <script src="<?= getPageFloor(0) ?>assets/js/plugins/datatables.js"></script>
   <!-- Kanban scripts -->
   <script src="<?= getPageFloor(0) ?>assets/js/plugins/dragula/dragula.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/plugins/jkanban/jkanban.js"></script>
-  <script>
-    if (document.getElementById('role')) {
-      var role = document.getElementById('role');
-      const example = new Choices(role);
-    }
-  </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -91,22 +75,6 @@ include "../../assets/server/logout.php";
         damping: '0.5'
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-
-    function changeConfirmStatus() {
-      const isConfirm = document.getElementsByName('confirm')[0].checked
-
-      if (isConfirm) {
-        if (document.getElementById("deactivateButton"))
-          document.getElementById("deactivateButton").removeAttribute("disabled");
-        if (document.getElementById("deleteButton"))
-          document.getElementById("deleteButton").removeAttribute("disabled");
-      } else {
-        if (document.getElementById("deactivateButton"))
-          document.getElementById("deactivateButton").setAttribute("disabled", "disabled");
-        if (document.getElementById("deleteButton"))
-          document.getElementById("deleteButton").setAttribute("disabled", "disabled");
-      }
     }
   </script>
   <!-- Github buttons -->

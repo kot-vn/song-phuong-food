@@ -129,6 +129,39 @@
         </form>
       </div>
     </div>
+    <!-- Card Sessions -->
+    <div class="card mt-4" id="sessions">
+      <div class="card-header pb-3">
+        <h5>Phiên đăng nhập</h5>
+        <p class="text-sm">Đây là danh sách các thiết bị đã đăng nhập vào tài khoản của bạn</p>
+      </div>
+      <div class="card-body pt-0">
+        <?php foreach ($sessions as $session) : ?>
+          <div class="d-flex align-items-center">
+            <div class="text-center w-5">
+              <?php if (in_array($session['os_platform'], ['Mobile', 'BlackBerry', 'Android', 'iPad', 'iPod', 'iPhone'])) : ?>
+                <i class="fas fa-mobile-alt text-lg opacity-6"></i>
+              <?php else : ?>
+                <i class="fas fa-desktop text-lg opacity-6"></i>
+              <?php endif ?>
+            </div>
+            <div class="my-auto ms-3">
+              <div class="h-100">
+                <p class="text-sm mb-1">
+                  <?= $session['browser_name'] ?> trên <?= $session['os_platform'] ?>
+                </p>
+                <p class="mb-0 text-xs">
+                  <?= $session['ip'] ?>
+                </p>
+              </div>
+            </div>
+            <span class="badge bg-gradient-<?= $session['ip'] == getIpAddress() ? 'success' : 'warning' ?> badge-sm my-auto ms-auto me-3"><?= $session['ip'] == getIpAddress() ? 'Đang hoạt động' : 'Đã hết hạn' ?></span>
+            <p class="text-secondary text-sm my-auto me-3"><?= $session['login_at'] ?></p>
+          </div>
+          <hr class="horizontal dark">
+        <?php endforeach ?>
+      </div>
+    </div>
     <!-- Card Delete Account -->
     <?php if (!$accountDetail['deleted_at']) : ?>
       <div class="card mt-4" id="delete">
