@@ -73,7 +73,7 @@ include "../assets/server/logout.php";
       <?php include getPageFloor(0) . "assets/components/molecules/footer.php" ?>
     </div>
   </main>
-  <?php if (getEnvironment() == "localhost") include "../assets/components/organisms/fixedPlugin.php" ?>
+  <?php if (getEnvironment() == "dev") include "../assets/components/organisms/fixedPlugin.php" ?>
   <!--   Core JS Files   -->
   <script src="<?= getPageFloor(0) ?>assets/js/core/popper.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/core/bootstrap.min.js"></script>
