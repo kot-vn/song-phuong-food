@@ -45,11 +45,11 @@
               </td>
               <td>
                 <?php if ($account['deleted_at']) : ?>
-                  <span class="badge badge-sm bg-gradient-danger">Deleted</span>
+                  <span class="badge badge-sm bg-gradient-danger">Đã bị xoá</span>
                 <?php elseif ($account['is_active']) : ?>
-                  <span class="badge badge-sm bg-gradient-success">Active</span>
+                  <span class="badge badge-sm bg-gradient-success">Đang hoạt động</span>
                 <?php else : ?>
-                  <span class="badge badge-sm bg-gradient-warning">Deactivated</span>
+                  <span class="badge badge-sm bg-gradient-warning">Đã bị vô hiệu hoá</span>
                 <?php endif ?>
               </td>
               <td class="table-action">

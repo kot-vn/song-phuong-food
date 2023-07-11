@@ -23,11 +23,11 @@
         <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
           <?php if ($accountDetail['deleted_at']) : ?>
             <span class="badge bg-gradient-danger">
-              Deleted
+              Đã bị xoá
             </span>
           <?php else : ?>
             <span class="badge bg-gradient-<?= $accountDetail['is_active'] ? "success" : "warning" ?>">
-              <?= $accountDetail['is_active'] ? "Active" : "Deactivated" ?>
+              <?= $accountDetail['is_active'] ? "Đang hoạt động" : "Đã bị vô hiệu hoá" ?>
             </span>
           <?php endif ?>
         </div>
