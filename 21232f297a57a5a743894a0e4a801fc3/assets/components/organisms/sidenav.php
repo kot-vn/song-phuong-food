@@ -44,7 +44,16 @@ $menuData = '[
         "nav-child": []
       }
     ]
-}
+  },
+  {
+    "nav-link": "sessions/",
+    "nav-icon": "fas fa-history",
+    "nav-link-text": "Phiên đăng nhập",
+    "nav-id": "sessions",
+    "nav-permission": [1,4],
+    "has-child": false,
+    "nav-child": []
+  }
 ]';
 $menuList = json_decode($menuData, true);
 ?>
