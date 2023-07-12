@@ -5,6 +5,7 @@ include "../assets/server/url.php";
 include "../assets/server/auth.php";
 include "../assets/server/accounts/accountsList.php";
 include "../assets/server/accounts/deactivate.php";
+include "../assets/server/accounts/reactivate.php";
 include "../assets/server/accounts/delete.php";
 include "../../env.php";
 
@@ -14,6 +15,7 @@ authBlock(getHost(getEnvironment()), getFullPath(), [1, 4]);
 permissionBlock($connect);
 authBlock(getHost(getEnvironment()), getFullPath(), [1, 4]);
 deactivateAccount($connect);
+reactivateAccount($connect);
 deleteAccount($connect);
 $accountsList = getAccountsList($connect, reset($_SESSION)['role_id'], getHost(getEnvironment()), getFullPath());
 
