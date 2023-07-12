@@ -190,6 +190,34 @@
         </div>
       </div>
     <?php endif ?>
+    <?php if ($accountDetail['deleted_at']) : ?>
+      <div class="card mt-4" id="reactive">
+        <div class="card-header">
+          <h5>Mở tài khoản</h5>
+          <p class="text-sm mb-0">Khôi phục lại tài khoản đã bị xoá</p>
+        </div>
+        <div class="card-body d-sm-flex pt-0">
+          <div class="d-flex align-items-center mb-sm-0 mb-4">
+            <div>
+              <div class="form-check form-switch mb-0">
+                <input class="form-check-input" name="reactivateConfirm" onclick="changeConfirmReactivateStatus()" type="checkbox" id="flexSwitchCheckDefault0">
+              </div>
+            </div>
+            <div class="ms-2">
+              <span class="text-dark font-weight-bold d-block text-sm">Xác nhận</span>
+              <span class="text-xs d-block">Tôi muốn mở lại hoạt tài khoản này.</span>
+            </div>
+          </div>
+          <div class="d-flex ms-auto">
+            <form method="POST">
+              <input type="text" class="d-none" name="activeAccount" value="<?= $accountDetail['id'] ?>">
+              <input type="text" name="confirmReopen" value="true" class="d-none">
+              <button class="btn bg-gradient-success mb-0 ms-auto" disabled type="submit" id="reactivateButton">Mở tài khoản</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <?php endif ?>
     <!-- Card Delete Account -->
     <?php if (!$accountDetail['deleted_at']) : ?>
       <div class="card mt-4" id="delete">

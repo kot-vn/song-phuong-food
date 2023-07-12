@@ -9,6 +9,7 @@ include "../../assets/server/accounts/changgPassword.php";
 include "../../assets/server/accounts/deactivate.php";
 include "../../assets/server/accounts/reactivate.php";
 include "../../assets/server/accounts/delete.php";
+include "../../assets/server/accounts/reopen.php";
 include "../../assets/server/accounts/sessions.php";
 include "../../../env.php";
 
@@ -21,6 +22,7 @@ updateBasicInfo($connect);
 deactivateAccount($connect);
 deleteAccount($connect);
 reactivateAccount($connect);
+reopenAccount($connect);
 $error = changePassword($connect);
 $accountDetail = getAccountDetail($connect);
 $sessions = getAccountSessionsList($connect);
