@@ -37,9 +37,14 @@ function getPageFloor($jumpStep)
   return str_repeat('../', count($path) - $jumpStep);
 }
 
-function isUrlActive($navLink)
+function isUrlActive($navId, $floor)
 {
-  return str_contains(getFullPath(), $navLink);
+  if ($floor == 1) {
+    return str_contains(getFullPath(), $navId);
+  } else {
+    $currentPage = basename(rtrim(getFullPath(), '/'));
+    return $currentPage == $navId;
+  }
 }
 
 function redirect($target, $path, $currentUrl)
