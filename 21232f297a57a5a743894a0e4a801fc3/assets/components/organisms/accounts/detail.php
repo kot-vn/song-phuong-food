@@ -190,7 +190,7 @@
         </div>
       </div>
     <?php endif ?>
-    <?php if ($accountDetail['deleted_at']) : ?>
+    <?php if ($accountDetail['deleted_at'] && reset($_SESSION)['role_id'] == 4) : ?>
       <div class="card mt-4" id="reactive">
         <div class="card-header">
           <h5>Mở tài khoản</h5>
