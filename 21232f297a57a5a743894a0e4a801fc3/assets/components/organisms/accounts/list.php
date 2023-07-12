@@ -69,6 +69,15 @@
                       </button>
                     </form>
                   <?php endif ?>
+                  <?php if (!$account['is_active'] && !$account['deleted_at']) : ?>
+                    <form method="POST">
+                      <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
+                      <input type="text" class="d-none" name="confirmReactivate" value="true">
+                      <button type="submit" class="btn p-1 m-0">
+                        <i class="fas fa-user-plus text-success"></i>
+                      </button>
+                    </form>
+                  <?php endif ?>
                   <?php if (!$account['deleted_at']) : ?>
                     <form method="POST">
                       <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">

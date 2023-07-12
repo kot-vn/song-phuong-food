@@ -7,6 +7,7 @@ include "../../assets/server/accounts/detail.php";
 include "../../assets/server/accounts/updateBasic.php";
 include "../../assets/server/accounts/changgPassword.php";
 include "../../assets/server/accounts/deactivate.php";
+include "../../assets/server/accounts/reactivate.php";
 include "../../assets/server/accounts/delete.php";
 include "../../assets/server/accounts/sessions.php";
 include "../../../env.php";
@@ -19,6 +20,7 @@ authBlock(getHost(getEnvironment()), getFullPath(), [1, 2, 4]);
 updateBasicInfo($connect);
 deactivateAccount($connect);
 deleteAccount($connect);
+reactivateAccount($connect);
 $error = changePassword($connect);
 $accountDetail = getAccountDetail($connect);
 $sessions = getAccountSessionsList($connect);
@@ -106,6 +108,18 @@ include "../../assets/server/logout.php";
           document.getElementById("deactivateButton").setAttribute("disabled", "disabled");
         if (document.getElementById("deleteButton"))
           document.getElementById("deleteButton").setAttribute("disabled", "disabled");
+      }
+    }
+
+    function changeConfirmReactivateStatus() {
+      const isConfirm = document.getElementsByName('reactivateConfirm')[0].checked
+
+      if (isConfirm) {
+        if (document.getElementById("reactivateButton"))
+          document.getElementById("reactivateButton").removeAttribute("disabled");
+      } else {
+        if (document.getElementById("reactivateButton"))
+          document.getElementById("reactivateButton").setAttribute("disabled", "disabled");
       }
     }
   </script>
