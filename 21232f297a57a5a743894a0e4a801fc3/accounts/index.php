@@ -7,6 +7,7 @@ include "../assets/server/accounts/accountsList.php";
 include "../assets/server/accounts/deactivate.php";
 include "../assets/server/accounts/reactivate.php";
 include "../assets/server/accounts/delete.php";
+include "../assets/server/accounts/reopen.php";
 include "../../env.php";
 
 session_start();
@@ -17,6 +18,7 @@ authBlock(getHost(getEnvironment()), getFullPath(), [1, 4]);
 deactivateAccount($connect);
 reactivateAccount($connect);
 deleteAccount($connect);
+reopenAccount($connect);
 $accountsList = getAccountsList($connect, reset($_SESSION)['role_id'], getHost(getEnvironment()), getFullPath());
 
 include "../assets/server/logout.php";
@@ -51,6 +53,11 @@ include "../assets/server/logout.php";
   <link href="<?= getPageFloor(0) ?>assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="<?= getPageFloor(0) ?>assets/css/soft-ui-dashboard.css?v=1.1.1" rel="stylesheet" />
+  <style>
+    .table-action i {
+      min-width: 15px;
+    }
+  </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
