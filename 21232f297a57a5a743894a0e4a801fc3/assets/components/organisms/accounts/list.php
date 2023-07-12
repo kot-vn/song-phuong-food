@@ -78,7 +78,7 @@
                       </button>
                     </form>
                   <?php endif ?>
-                  <?php if ($account['deleted_at']) : ?>
+                  <?php if ($account['deleted_at'] && reset($_SESSION)['role_id'] == 4) : ?>
                     <form method="POST">
                       <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
                       <input type="text" class="d-none" name="confirmReopen" value="true">
