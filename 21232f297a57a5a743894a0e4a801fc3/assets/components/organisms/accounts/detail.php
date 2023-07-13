@@ -160,6 +160,11 @@
           </div>
           <hr class="horizontal dark">
         <?php endforeach ?>
+        <?php if (mysqli_num_rows($sessions) == 0) : ?>
+          <div class="dataTable-bottom">
+            <div class="dataTable-info w-100 text-center">Không có dữ liệu</div>
+          </div>
+        <?php endif ?>
       </div>
     </div>
     <?php if (!$accountDetail['deleted_at'] && !$accountDetail['is_active'] && in_array(reset($_SESSION)['role_id'], [1, 4])) : ?>
