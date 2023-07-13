@@ -8,6 +8,12 @@
           </span>
           <input type="text" name="name" class="form-control" placeholder="Tìm theo tên...">
         </div>
+        <button class="btn btn-icon btn-3 bg-gradient-success mb-0" type="submit">
+          <span class="btn-inner--icon">
+            <i class="fas fa-search"></i>
+          </span>
+          <span class="btn-inner--text d-none d-sm-inline">Tìm kiếm</span>
+        </button>
         <button class="btn btn-icon btn-3 bg-gradient-success mb-0" type="button" onclick="location.href='create'">
           <span class="btn-inner--icon">
             <i class="fas fa-user-plus"></i>
