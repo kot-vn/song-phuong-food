@@ -73,7 +73,7 @@
                     <form method="POST">
                       <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
                       <input type="text" class="d-none" name="confirmReactivate" value="true">
-                      <button type="submit" class="btn p-1 m-0">
+                      <button type="submit" class="btn p-1 m-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Tái kích hoạt">
                         <i class="fas fa-user-plus text-success"></i>
                       </button>
                     </form>
@@ -82,7 +82,7 @@
                     <form method="POST">
                       <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
                       <input type="text" class="d-none" name="confirmReopen" value="true">
-                      <button type="submit" class="btn p-1 m-0">
+                      <button type="submit" class="btn p-1 m-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Khôi phục">
                         <i class="fas fa-unlock-alt text-success"></i>
                       </button>
                     </form>
