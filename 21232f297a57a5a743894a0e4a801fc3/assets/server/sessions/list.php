@@ -2,10 +2,18 @@
 function getSessionsList($connect, $path, $currentUrl)
 {
   $query = "SELECT
-            *,
-            COUNT(*) OVER() AS total_records
-          FROM
-            `access_log`";
+              access_log.id,
+              accounts.email,
+              roles.name,
+              access_log.ip,
+              access_log.browser_name,
+              access_log.os_platform,
+              access_log.login_at,
+              COUNT(*) OVER() AS total_records
+            FROM
+              access_log
+            JOIN accounts ON access_log.account_id = accounts.id
+            JOIN roles ON accounts.role_id = roles.id";
 
   $page = 1;
   if (isset($_GET['page'])) {
