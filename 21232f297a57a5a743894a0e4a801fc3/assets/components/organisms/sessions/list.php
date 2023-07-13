@@ -5,7 +5,8 @@
         <thead>
           <tr>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">ID tài khoản</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tài khoản</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Vai trò</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">IP truy cập</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên trình duyệt</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên hệ thống</th>
@@ -19,7 +20,10 @@
                 <p class="text-xs px-3 font-weight-bold mb-0"><?= $session['id'] ?></p>
               </td>
               <td>
-                <p class="text-xs font-weight-bold mb-0"><?= $session['account_id'] ?></p>
+                <p class="text-xs font-weight-bold mb-0"><?= $session['email'] ?></p>
+              </td>
+              <td>
+                <p class="text-xs font-weight-bold mb-0"><?= $session['name'] ?></p>
               </td>
               <td>
                 <p class="text-xs font-weight-bold mb-0"><?= $session['ip'] ?></p>
