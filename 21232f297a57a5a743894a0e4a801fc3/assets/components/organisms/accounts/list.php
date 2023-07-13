@@ -102,6 +102,11 @@
           <?php endforeach ?>
         </tbody>
       </table>
+      <?php if (mysqli_num_rows($accountsList['result']) == 0) : ?>
+        <div class="dataTable-bottom">
+          <div class="dataTable-info w-100 text-center">Không có dữ liệu</div>
+        </div>
+      <?php endif ?>
     </div>
     <?php if ($accountsList['pages'] > 1) : ?>
       <div class="d-flex pagination-container justify-content-end p-3 pb-0">
