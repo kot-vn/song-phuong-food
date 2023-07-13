@@ -4,7 +4,7 @@
     <?php foreach ($path as $index => $location) : ?>
       <?php if ($index < count($path) - 1) : ?>
         <li class="breadcrumb-item text-sm">
-          <a class="opacity-5 text-dark" href="<?= getPageFloor(0) ?>">
+          <a class="opacity-5 text-dark" href="<?= getPageFloor(0) . strtolower($location) ?>">
             <?= $location ?>
           </a>
         </li>

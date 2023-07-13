@@ -6,7 +6,17 @@ function login($connect)
   if (isset($_POST['email']) && isset($_POST['password'])) {
     $email = $_POST['email'];
     $password = md5($_POST['password']);
-    $query = "SELECT accounts.id, accounts.display_name, accounts.is_active, roles.name AS role_name FROM `accounts` INNER JOIN roles ON accounts.role_id = roles.id WHERE accounts.email = '$email' AND accounts.password = '$password' AND accounts.deleted_at IS NULL";
+    $query = "SELECT
+                  accounts.id,
+                  accounts.display_name,
+                  accounts.is_active,
+                  accounts.role_id,
+                  roles.name AS role_name
+              FROM
+                  `accounts`
+              INNER JOIN roles ON accounts.role_id = roles.id
+              WHERE
+                  accounts.email = '$email' AND accounts.password = '$password' AND accounts.deleted_at IS NULL";
     $result = $connect->query($query);
 
     if (mysqli_num_rows($result) == 0) {
@@ -15,10 +25,12 @@ function login($connect)
       $result = mysqli_fetch_array($result);
 
       if ($result['is_active']) {
-        if ($result['role_name'] == "Admin") {
+        if ($result['role_id'] == 1) {
           $_SESSION['admin'] = $result;
-        } else if ($result['role_name'] == "Employee") {
+        } else if ($result['role_id'] == 2) {
           $_SESSION['employee'] = $result;
+        } else if ($result['role_id'] == 4) {
+          $_SESSION['super-admin'] = $result;
         }
         $_SESSION['start'] = time();
         $_SESSION['expire'] = $_SESSION['start'] + (6 * 60 * 60);

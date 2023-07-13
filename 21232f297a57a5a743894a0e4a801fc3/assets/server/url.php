@@ -1,7 +1,7 @@
 <?php
 function getHost($environment)
 {
-  if ($environment === "localhost") {
+  if ($environment === "dev") {
     $path = ($_ENV['RUNNER_HOST'] == 'xampp') ? '/song-phuong-food/' : '/';
   } else {
     $path = "/";
@@ -35,4 +35,25 @@ function getPageFloor($jumpStep)
 {
   $path = getPath();
   return str_repeat('../', count($path) - $jumpStep);
+}
+
+function isUrlActive($navId, $floor)
+{
+  if ($floor == 1) {
+    return str_contains(getFullPath(), $navId);
+  } else {
+    $currentPage = basename(rtrim(getFullPath(), '/'));
+    return $currentPage == $navId;
+  }
+}
+
+function redirect($target, $path, $currentUrl)
+{
+  $cpanelLocation = "21232f297a57a5a743894a0e4a801fc3";
+  $location = $path . $cpanelLocation . "/" . $target;
+
+  if ($currentUrl != $location) {
+    header("Location: $location", true, 301);
+    exit;
+  }
 }

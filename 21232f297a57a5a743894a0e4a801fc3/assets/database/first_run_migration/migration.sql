@@ -403,4 +403,142 @@ ALTER TABLE `access_log`
 ADD
     `os_platform` VARCHAR(255) NULL AFTER `browser_name`;SET time_zone = "+00:00";
 
+ALTER TABLE `accounts` DROP `address`;SET time_zone = "+00:00";
+
 ALTER TABLE `access_log` DROP COLUMN `device_name`;
+SET time_zone = "+00:00";
+
+INSERT INTO
+    `roles`(
+        `id`,
+        `name`,
+        `created_at`,
+        `created_by`,
+        `updated_at`,
+        `updated_by`,
+        `deleted_at`,
+        `deleted_by`
+    )
+VALUES (
+        NULL,
+        'Super Admin',
+        '2023-06-29 22:21:14',
+        '3',
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    );
+
+INSERT INTO
+    `accounts` (
+        `id`,
+        `email`,
+        `password`,
+        `display_name`,
+        `phone_number`,
+        `role_id`,
+        `is_active`,
+        `created_at`,
+        `created_by`,
+        `updated_at`,
+        `updated_by`,
+        `deleted_at`,
+        `deleted_by`
+    )
+VALUES (
+        NULL,
+        'super.admin@songphuongfood.com',
+        '25f9e794323b453885f5181f1b624d0b',
+        'Super Admin Test',
+        '0123456789',
+        '4',
+        '1',
+        '2023-06-29 22:22:45',
+        '3',
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    );SET time_zone = "+00:00";
+
+INSERT INTO
+    `accounts` (
+        `id`,
+        `email`,
+        `password`,
+        `display_name`,
+        `phone_number`,
+        `role_id`,
+        `is_active`,
+        `created_at`,
+        `created_by`,
+        `updated_at`,
+        `updated_by`,
+        `deleted_at`,
+        `deleted_by`
+    )
+VALUES (
+        NULL,
+        'employee.deleted@songphuongfood.com',
+        '25f9e794323b453885f5181f1b624d0b',
+        'Deleted Employee',
+        '0123456789',
+        '2',
+        '1',
+        '2023-06-29 23:07:59',
+        '3',
+        NULL,
+        NULL,
+        '2023-06-29',
+        '3'
+    );
+
+ALTER TABLE `accounts` ADD INDEX(`is_active`);SET time_zone = "+00:00";
+
+ALTER TABLE
+    `accounts` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;
+
+ALTER TABLE
+    `data_types` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;
+
+ALTER TABLE
+    `images` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;
+
+ALTER TABLE
+    `image_types` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;
+
+ALTER TABLE
+    `master_datas` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;
+
+ALTER TABLE
+    `products` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;
+
+ALTER TABLE
+    `product_categories` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;
+
+ALTER TABLE
+    `promotions` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;
+
+ALTER TABLE
+    `promotion_types` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;
+
+ALTER TABLE
+    `roles` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;
+
+ALTER TABLE
+    `shops` CHANGE `deleted_at` `deleted_at` DATETIME NULL DEFAULT NULL;SET time_zone = "+00:00";
+
+UPDATE `roles`
+SET
+    `name` = 'Nhân viên',
+    `updated_at` = '2023-07-09 15:46:00',
+    `updated_by` = '3'
+WHERE `roles`.`id` = 2;
+
+UPDATE `roles`
+SET
+    `name` = 'Quản lý',
+    `updated_at` = '2023-07-09 15:46:42',
+    `updated_by` = '3'
+WHERE `roles`.`id` = 1;

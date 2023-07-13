@@ -1,17 +1,19 @@
 <?php
-include "../assets/server/databaseConnector.php";
-include "../assets/server/environment.php";
-include "../assets/server/url.php";
-include "../assets/server/auth.php";
-include "../../env.php";
+include "../../assets/server/databaseConnector.php";
+include "../../assets/server/environment.php";
+include "../../assets/server/url.php";
+include "../../assets/server/auth.php";
+include "../../assets/server/accounts/create.php";
+include "../../../env.php";
 
 session_start();
 $connect = connectDatabase(getEnvironment());
-authBlock(getHost(getEnvironment()), getFullPath(), [1, 2, 4]);
+authBlock(getHost(getEnvironment()), getFullPath(), [1, 4]);
 permissionBlock($connect);
-authBlock(getHost(getEnvironment()), getFullPath(), [1, 2, 4]);
+authBlock(getHost(getEnvironment()), getFullPath(), [1, 4]);
+$error = createAccount($connect, getHost(getEnvironment()), getFullPath());
 
-include "../assets/server/logout.php";
+include "../../assets/server/logout.php";
 ?>
 
 <!DOCTYPE html>
@@ -43,16 +45,6 @@ include "../assets/server/logout.php";
   <link href="<?= getPageFloor(0) ?>assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="<?= getPageFloor(0) ?>assets/css/soft-ui-dashboard.css?v=1.1.1" rel="stylesheet" />
-
-  <style>
-    .embed-page {
-      height: calc(100vh - 300px);
-    }
-
-    .ld-w {
-      width: 50px;
-    }
-  </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -62,29 +54,20 @@ include "../assets/server/logout.php";
     <?php include getPageFloor(0) . "assets/components/organisms/navbar.php" ?>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-      <div class="embed-page w-100">
-        <div id="loadingImage" class="h-100">
-          <div class="d-flex h-100 justify-content-center align-items-center">
-            <img src="https://nepcha.com/site/_nuxt/loading.fcbaa9d1.gif" class="ld-w" />
-          </div>
-        </div>
-        <iframe id="landingPage" type="text/html" src='https://nepcha.com/site/songphuongfood.com' width="100%" height="100%"></iframe>
-      </div>
+      <?php include getPageFloor(0) . "assets/components/organisms/accounts/create.php" ?>
       <?php include getPageFloor(0) . "assets/components/molecules/footer.php" ?>
     </div>
   </main>
-  <?php if (getEnvironment() == "dev") include "../assets/components/organisms/fixedPlugin.php" ?>
+  <?php if (getEnvironment() == "dev") include getPageFloor(0) . "assets/components/organisms/fixedPlugin.php" ?>
   <!--   Core JS Files   -->
   <script src="<?= getPageFloor(0) ?>assets/js/core/popper.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/core/bootstrap.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="<?= getPageFloor(0) ?>assets/js/plugins/multistep-form.js"></script>
   <!-- Kanban scripts -->
   <script src="<?= getPageFloor(0) ?>assets/js/plugins/dragula/dragula.min.js"></script>
   <script src="<?= getPageFloor(0) ?>assets/js/plugins/jkanban/jkanban.js"></script>
-  <script src="<?= getPageFloor(0) ?>assets/js/plugins/chartjs.min.js"></script>
-  <script src="<?= getPageFloor(0) ?>assets/js/plugins/threejs.js"></script>
-  <script src="<?= getPageFloor(0) ?>assets/js/plugins/orbit-controls.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -98,20 +81,7 @@ include "../assets/server/logout.php";
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="<?= getPageFloor(0) ?>assets/js/soft-ui-dashboard.min.js?v=1.1.1"></script>
-  <script>
-    // Get references to the image and loading page
-    const loadingImage = document.getElementById('loadingImage');
-    const landingPage = document.getElementById('landingPage');
-
-    // Hide the landing page content initially
-    landingPage.style.display = 'none';
-
-    // Show the content and hide the loading image after the page has finished loading
-    landingPage.addEventListener('load', () => {
-      loadingImage.style.display = 'none';
-      landingPage.style.display = 'block';
-    });
-  </script>
+  <?php if (!empty($error)) echo "<script type='text/JavaScript'>setActivePanel(0);setActivePanel(1)</script>" ?>
 </body>
 
 </html>

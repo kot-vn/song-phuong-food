@@ -2,7 +2,7 @@
   <span class="badge badge-pill badge-md bg-gradient-success">
     <?php if (getEnvironment() == "staging") {
       echo "STG";
-    } else if (getEnvironment() == "localhost") {
+    } else if (getEnvironment() == "dev") {
       echo "DEV";
     }
     ?>
