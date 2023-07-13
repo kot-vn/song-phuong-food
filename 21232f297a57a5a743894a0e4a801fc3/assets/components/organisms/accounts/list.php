@@ -56,7 +56,7 @@
                 <div class="d-flex gap-2">
                   <form action="<?= getPageFloor(0) . "accounts/detail/" ?>" method="POST">
                     <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
-                    <button type="submit" class="btn p-1 m-0">
+                    <button type="submit" class="btn p-1 m-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Chi tiết">
                       <i class="fas fa-user-edit text-secondary"></i>
                     </button>
                   </form>
@@ -64,7 +64,7 @@
                     <form method="POST">
                       <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
                       <input type="text" class="d-none" name="deactivateModal" value="true">
-                      <button type="submit" class="btn p-1 m-0">
+                      <button type="submit" class="btn p-1 m-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Vô hiệu xoá">
                         <i class="fas fa-user-alt-slash text-warning"></i>
                       </button>
                     </form>
@@ -91,7 +91,7 @@
                     <form method="POST">
                       <input type="text" class="d-none" name="activeAccount" value="<?= $account['id'] ?>">
                       <input type="text" class="d-none" name="deleteModal" value="true">
-                      <button type="submit" class="btn p-1 m-0">
+                      <button type="submit" class="btn p-1 m-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Xoá">
                         <i class="fas fa-user-times text-danger"></i>
                       </button>
                     </form>
