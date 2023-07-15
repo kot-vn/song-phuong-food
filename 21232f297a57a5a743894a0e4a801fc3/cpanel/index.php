@@ -68,7 +68,7 @@ include "../assets/server/logout.php";
             <img src="https://nepcha.com/site/_nuxt/loading.fcbaa9d1.gif" class="ld-w" />
           </div>
         </div>
-        <iframe id="landingPage" type="text/html" src='https://nepcha.com/site/songphuongfood.com' width="100%" height="100%"></iframe>
+        <iframe id="landingPage" type="text/html" src='https://nepcha.com/site/songphuongfood.com' style="display: none;" width="100%" height="100%"></iframe>
       </div>
       <?php include getPageFloor(0) . "assets/components/molecules/footer.php" ?>
     </div>
@@ -102,9 +102,6 @@ include "../assets/server/logout.php";
     // Get references to the image and loading page
     const loadingImage = document.getElementById('loadingImage');
     const landingPage = document.getElementById('landingPage');
-
-    // Hide the landing page content initially
-    landingPage.style.display = 'none';
 
     // Show the content and hide the loading image after the page has finished loading
     landingPage.addEventListener('load', () => {
